@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-	</head>
 
-	<body>
+<head>
+	<script src="./jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="./app.js"></script>
+	<script type="text/javascript" src="./registration.js"></script>
+</head>
+
+<body>
+
+	<div id="welcome">
+
+		<span> <b>welcome to the pacman game!</b></span>
+		<button onclick="swapDiv('registration', 'welcome')" id="regButton" value="Click To Open registration">Click To Open registration</button>
+		<button onclick="swapDiv('login', 'welcome')" id="loginButton" value="Click To Open login page">Click To Open login page</button>
+
+	</div>
+
+	<div id="registration" style="display: none;">
+		<span> <b>welcome to the registration page!</b></span>
+	</div>
+
+	<div id="login" style="display: none;">
+		<span> <b>welcome to the login page!</b></span>
+	</div>
+
+
+	<div id="main game window" style="display: none;">
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -17,5 +38,9 @@
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
-	</body>
+	</div>
+
+
+</body>
+
 </html>
