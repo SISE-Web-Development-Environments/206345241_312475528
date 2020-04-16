@@ -160,7 +160,7 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
+	if (score >= 2 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 	if (score == 50) {
