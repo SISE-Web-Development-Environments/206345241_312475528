@@ -67,3 +67,16 @@ button:hover {
      width: 100%;
   }
 }
+
+#signupForm {
+  width: 670px;
+}
+#signupForm label.error {
+  margin-left: 10px;
+  width: auto;
+  display: inline;
+}
+#newsletter_topics label.error {
+  display: none;
+  margin-left: 103px;
+}
