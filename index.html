@@ -4,49 +4,80 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
+
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./registration.js"></script>
 
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="jquery.validate.js"></script>
+
+<!-- 	<script src="jquery.js"></script>
+	<script src="jquery.validate.js"></script>
+	<link rel="stylesheet" href="css/screen.css"> -->
+
+
+
+
+<!-- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+ 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+	<script>
+	$( function() {
+	  $( "#datepicker" ).datepicker();
+	} );
+	</script>
 </head>
 
 <body>
-
+<div class="switch screens">
 	<div id="welcome">
 
 		<span> <b>welcome to the pacman game!</b></span>
 		<br>
 		<br>
-		<button onclick="swapDiv('registration', 'welcome')" id="regButton" value="Click To Open registration">Click To
+		<button onclick="swapDiv('registration', 'welcome')" id="regButton" class="wlc-btn" value="Click To Open registration">Click To
 			Open registration</button>
 		<br>
 		<br>
-		<button onclick="swapDiv('login', 'welcome')" id="loginButton" value="Click To Open login page">Click To Open
+		<button onclick="swapDiv('login', 'welcome')" id="loginButton" class="wlc-btn" value="Click To Open login page">Click To Open
 			login page</button>
 
 	</div>
 
 	<div id="registration" class="container" style="display: none;">
-		<form id="myForm" onsubmit="submitFunc()">
-			<div class="container">
-				<h1>Register</h1>
-				<p>Please fill in this form to create an account.</p>
-				<hr>
+		<form class="cmxform" id="signupForm" method="get" action="">
+			<fieldset>
+				<legend>Validating a complete form</legend>
 
-				<label for="userName"><b>User Name</b></label>
-				<input type="text" placeholder="User name" name="Uname" required>
-
-				<label for="psw"><b>Password</b></label>
-				<input type="password" placeholder="Enter Password" name="psw" required>
-
-				<label for="fullName"><b>Full Name</b></label>
-				<input type="text" placeholder="Full name" name="Fname" required>
-
-				<label for="email"><b>Email</b></label>
-				<input type="text" placeholder="Enter Email" name="email" required>
-				<br>
-				<button type="submit" value="Submit" >Register</button>
-			</div>
-
+				<p>
+					<label for="username">Username</label>
+					<input id="username" name="username" type="text">
+				</p>
+				<p>
+					<label for="password">Password</label>
+					<input id="password" name="password" type="password">
+				</p>
+				<p>
+					<label for="firstname">First name</label>
+					<input id="firstname" name="firstname" type="text">
+				</p>
+				<p>
+					<label for="lastname">Last name</label>
+					<input id="lastname" name="lastname" type="text">
+				</p>
+				<p>
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email">
+				</p>
+				<p>
+					<label for="date">Date of birth</label>
+					<input id="date" name="date" type="date">
+				</p>
+				<p>
+					<input class="submit" type="submit" value="Submit">
+				</p>
+			</fieldset>
 		</form>
 
 	</div>
@@ -76,7 +107,7 @@
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
 	</div>
-
+</div>
 
 </body>
 
