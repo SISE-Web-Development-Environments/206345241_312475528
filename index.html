@@ -5,8 +5,9 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
 
-	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./registration.js"></script>
+
+	<script type="text/javascript" src="./app.js"></script>
 
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="jquery.validate.js"></script>
@@ -22,6 +23,15 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">
  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+	<script>
+
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("submitted!");
+		}
+	});
+</script>
+
 	<script>
 	$( function() {
 	  $( "#datepicker" ).datepicker();
@@ -84,6 +94,11 @@
 
 	<div id="login" style="display: none;">
 		<span> <b>welcome to the login page!</b></span>
+		<form>
+
+	</form>
+
+
 	</div>
 
 	<div id="settings" style="display: none;">
@@ -111,4 +126,4 @@
 
 </body>
 
-</html>
+</html> -->
