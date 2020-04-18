@@ -1,9 +1,9 @@
-$.validator.setDefaults({
+/* $.validator.setDefaults({
 	submitHandler: function() {
 		alert("submitted!");
 	}
-});
-$(document).ready(function () {
+}); */
+$(document).ready(function() {
 
 	// validate signup form on keyup and submit
 	$("#signupForm").validate({
@@ -63,9 +63,9 @@ $(document).ready(function () {
 
 
 function swapDiv(newDiv, oldDiv) {
-
+/* 
 	$(newDiv).hide();
-	$(oldDiv).show();
+	$(oldDiv).show(); */
 	document.getElementById(newDiv).style.display = "block";
 	document.getElementById(oldDiv).style.display = "none";
 }
