@@ -8,6 +8,7 @@
 
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./registration.js"></script>
+	<script type="text/javascript" src="./login.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
@@ -52,7 +53,6 @@
 	</div>
 	<div id="content">
 		<div id="welcome">
-
 			<span ALIGN="center"> <b>welcome to the pacman game!</b></span>
 			<br>
 			<br>
@@ -100,17 +100,30 @@
 						<input class="submit" type="submit" value="Submit">
 					</p>
 				</fieldset>
+
 			</form>
 
 		</div>
 
 		<div id="login" style="display: none;">
 			<span> <b>welcome to the login page!</b></span>
-			<form>
-
+			<form class="cmxform" id="loginForm" name="loginForm" method="get" action="">
+				<fieldset>
+					<legend>Log in:</legend>
+	
+					<p>
+						<label for="username">Username</label>
+						<input id="username" name="username" type="username">
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input id="password" name="password" type="password">
+					</p>
+					<p>
+						<input class="submit" type="submit" value="Submit">
+					</p>
+				</fieldset>
 			</form>
-
-
 		</div>
 
 		<div id="settings" style="display: none;">
