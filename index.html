@@ -12,23 +12,6 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
-	<!-- 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="jquery.validate.js"></script>
-
-	<script src="jquery.js"></script>
-	<script src="jquery.validate.js"></script>
-
-
-	<script>
-
-	$.validator.setDefaults({
-			submitHandler: function () {
-				alert("submitted!");
-			}
-		}); 
-
-
-	</script>  -->
 </head>
 
 <body>
@@ -37,37 +20,42 @@
 
 		<h2 ALIGN="center">logo</h1>
 
-			<h3 ALIGN="center">by Yuval Mor Yosef and Adi Ashkenazi</h1>
+		<h3 ALIGN="center">by Yuval Mor Yosef and Adi Ashkenazi</h1>
 
 	</header>
+<script>
+	
+	$(document).ready(function () {
+		swapDiv('welcome');
+	});
 
+</script>
 	<div id="menu">
-		<div class="navbar">
-			<li class="nav-item"> <a href="#welcome">welcome</a></li>
-			<li class="nav-item"> <a href="#registration">registration</a></li>
-			<li class="nav-item"> <a href="#login">login</a></li>
-			<li class="nav-item"> <a href="#settings">settings</a></li>
-			<li class="nav-item"> <a href="#about">about</a></li>
-			<li class="nav-item"> <a href="#game">game</a></li>
-		</div>
+		<button class="tablink" onclick="swapDiv('welcome')">welcome</button>
+		<button class="tablink" onclick="swapDiv('registration')">registration</button>
+		<button class="tablink" onclick="swapDiv('login')">login</button>
+		<button class="tablink" onclick="swapDiv('settings')">settings</button>
+		<button class="tablink" onclick="swapDiv('about')">about</button>
+		<button class="tablink" onclick="swapDiv('game')">game</button>
+
 	</div>
 	<div id="content">
-		<div id="welcome">
+		<div id="welcome" class="content">
 			<span ALIGN="center"> <b>welcome to the pacman game!</b></span>
 			<br>
 			<br>
-			<button onclick="swapDiv('registration', 'welcome')" id="regButton" class="wlc-btn"
+			<button onclick="swapDiv('registration')" id="regButton" class="wlc-btn"
 				value="Click To Open registration">Click To
 				Open registration</button>
 			<br>
 			<br>
-			<button onclick="swapDiv('login', 'welcome')" id="loginButton" class="wlc-btn"
-				value="Click To Open login page">Click To Open
+			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page">Click
+				To Open
 				login page</button>
 
 		</div>
 
-		<div id="registration" class="container" style="display: none;">
+		<div id="registration" class="content" style="display: none;">
 			<form class="cmxform" id="signupForm" name="signupForm" method="get" action="">
 				<fieldset>
 					<legend>Validating a complete form</legend>
@@ -105,12 +93,12 @@
 
 		</div>
 
-		<div id="login" style="display: none;">
+		<div id="login" class="content" style="display: none;">
 			<span> <b>welcome to the login page!</b></span>
 			<form class="cmxform" id="loginForm" name="loginForm" method="get" action="">
 				<fieldset>
 					<legend>Log in:</legend>
-	
+
 					<p>
 						<label for="username">Username</label>
 						<input id="username" name="username" type="username">
@@ -126,15 +114,15 @@
 			</form>
 		</div>
 
-		<div id="settings" style="display: none;">
+		<div id="settings" class="content" style="display: none;">
 			<span> <b>welcome to the settings page!</b></span>
 		</div>
 
-		<div id="about" style="display: none;">
+		<div id="about" class="content" style="display: none;">
 			<span> <b>welcome to the about page!</b></span>
 		</div>
 
-		<div id="game" style="display: none;">
+		<div id="game" class="content" style="display: none;">
 			<div id="score">
 				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
@@ -150,9 +138,9 @@
 	</div>
 
 	<footer>
-
+		<strong>details about the web </strong>
 	</footer>
 
 </body>
 
-</html> -->
+</html> 
