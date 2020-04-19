@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
 
+	localStorage.setItem("p","p");
 	$.validator.addMethod("checkPsw", function(value) {
 		let letter = /[a-zA-Z]/; 
 		let number = /\d/; 
@@ -68,17 +69,32 @@ $(document).ready(function () {
 			}
 		},
 		submitHandler: function (form) {
+			saveNameAndPassword();
 			form.submit();
+
 		}
 	});
+
+
 });
 
 
 
 function swapDiv(newDiv, oldDiv) {
-	/* 
-		$(newDiv).hide();
-		$(oldDiv).show(); */
+
 	document.getElementById(newDiv).style.display = "block";
 	document.getElementById(oldDiv).style.display = "none";
 }
+
+
+function saveNameAndPassword() 
+   {
+	let username = $('#signupForm').find('input[name="username"]').val();
+	let password = $('#signupForm').find('input[name="password"]').val()
+	localStorage.setItem(username, password);
+
+//	let username=$('#signupForm').getElementById("username");
+//	let password=$('#signupForm').getElementById("password");
+//	localStorage.setItem(username.value,password.value);
+
+   }  
