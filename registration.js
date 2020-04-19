@@ -80,12 +80,21 @@ $(document).ready(function () {
 
 
 
-function swapDiv(newDiv, oldDiv) {
+/* function swapDiv(newDiv, oldDiv) {
 
 	document.getElementById(newDiv).style.display = "block";
 	document.getElementById(oldDiv).style.display = "none";
-}
+} */
 
+function swapDiv(newDiv) {
+	var i, content;
+	content = document.getElementsByClassName("content");
+	for (i = 0; i < content.length; i++) {
+		content[i].style.display = "none";
+	}
+	document.getElementById(newDiv).style.display = "block";
+  
+  }
 
 function saveNameAndPassword() 
    {
