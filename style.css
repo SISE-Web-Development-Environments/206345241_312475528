@@ -76,7 +76,30 @@ button:hover {
   width: auto;
   display: inline;
 }
-#newsletter_topics label.error {
-  display: none;
-  margin-left: 103px;
+header {
+	justify-content: space-between;
+	align-items: center;
+  background-color: #333;
+  color: wheat;
+} 
+/* Links inside the navbar */
+.navbar a {
+  float: center;
+  display: block;
+  color: darkblue;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar  li {
+	display: inline-block;
+  padding: 0px 25px;
+  margin: 0px;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+  
 }
