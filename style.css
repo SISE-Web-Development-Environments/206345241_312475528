@@ -67,7 +67,13 @@ button:hover {
      width: 100%;
   }
 }
+#regButton{
+  width: 50%;
+}
 
+#loginButton{
+  width: 50%;
+}
 #signupForm {
   width: 670px;
 }
@@ -76,12 +82,46 @@ button:hover {
   width: auto;
   display: inline;
 }
+#loginForm {
+  width: 670px;
+}
 header {
 	justify-content: space-between;
 	align-items: center;
   background-color: #333;
   color: wheat;
 } 
+
+
+
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 16.5%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content */
+.content {
+  color: darkblue;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+
+
+
 /* Links inside the navbar */
 .navbar a {
   float: center;
