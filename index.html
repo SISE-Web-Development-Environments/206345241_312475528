@@ -12,6 +12,9 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 </head>
 
 <body>
@@ -35,8 +38,11 @@
 		<button class="tablink" onclick="swapDiv('registration')">registration</button>
 		<button class="tablink" onclick="swapDiv('login')">login</button>
 		<button class="tablink" onclick="swapDiv('settings')">settings</button>
-		<button class="tablink" onclick="swapDiv('about')">about</button>
-		<button class="tablink" onclick="swapDiv('game')">game</button>
+<!-- 		<button class="tablink" onclick="swapDiv('about')" rel="modal:open">about</button>-->
+
+ 		<button class="tablink"> <a href="#about" rel="modal:open">about</a></button>
+
+ 		<button class="tablink" onclick="swapDiv('game')">game</button>
 
 	</div>
 	<div id="content">
@@ -116,10 +122,68 @@
 
 		<div id="settings" class="content" style="display: none;">
 			<span> <b>welcome to the settings page!</b></span>
+			<form class="cmxform" id="settingsForm" name="settingsForm" method="get" action="">
+				<fieldset>
+					<legend>settings:</legend>
+
+					<p>
+						<label for="up">up</label>
+						<input id="up" name="up" type="text">
+					</p>
+					<p>
+						<label for="down">down</label>
+						<input id="down" name="down" type="text">
+					</p>
+					<p>
+						<label for="left">left</label>
+						<input id="left" name="left" type="text">
+					</p>
+					<p>
+						<label for="right">right</label>
+						<input id="right" name="right" type="text">
+					</p>
+					<p>
+						<label for="food">food (between 50 and 90)</label>
+						<input id="food" name="food" type="text">
+					</p>
+
+					<p>
+						<label for="food-color-5 points"> food-color-5 points</label>
+						<input id="food-color-5 points" name="food-color-5 points" type="text">
+					</p>
+					<p>
+						<label for="food-color-15 points"> food-color-15 points</label>
+						<input id="food-color-15 points" name="food-color-15 points" type="text">
+					</p>
+					<p>
+						<label for="food-color-25 points"> food-color-25 points</label>
+						<input id="food-color-25 points" name="food-color-25 points" type="text">
+					</p>
+
+					<p>
+						<label for="time">time fot the game (min 60 seconds)</label>
+						<input id="time" name="time" type="text">
+					</p>
+					<p>
+						<label for="monsters">monsters amount (between 1 and 4)</label>
+						<input id="monsters" name="monsters" type="text">
+					</p>
+
+					<button class="" onclick="">random</button>
+
+					<p>
+						<input class="submit" type="submit" value="Submit">
+					</p>
+				</fieldset>
+			</form>
 		</div>
 
 		<div id="about" class="content" style="display: none;">
 			<span> <b>welcome to the about page!</b></span>
+			<p>This Packman game submmited by Yuval Mor Yosef and Adi Ashkenazi.</p>
+			<p>We used jquery modal by "AJAX" that helped us by using an existing DOM element and loading a page with AJAX.</p>
+			<p>Our difficulties in this project were:</p>
+			<a href="#" rel="modal:close">Close</a>	
 		</div>
 
 		<div id="game" class="content" style="display: none;">
