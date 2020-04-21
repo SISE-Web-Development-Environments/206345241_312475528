@@ -1,9 +1,16 @@
 $(document).ready(function () {
 	$('#loginForm').submit(function () {
-		checkUser();
+	let b=checkUser();
+		if(b==true){
+			swapDiv('settings');
+			return false;
+		}
+		if(b==false){
+			swapDiv('welcome');
+			return false;
+		}
 
-
-});
+	});
 });
 
 function checkUser() 
@@ -13,25 +20,14 @@ function checkUser()
 	let password = $('#loginForm').find('input[name="password"]').val()
 	
 	if(localStorage.getItem(username) == password){
-		swapDiv( 'game','login');
-		alert("good");
-
-		return false;
+		//alert("good! go to the game");
+		return true;
 	}
-	alert("wrong");
+	//alert("wrong user name or password, try agein");
 	return false;
-
 	
    }
-
-/* 
-function swapDiv(newDiv, oldDiv) {
-
-	document.getElementById(newDiv).style.display = "block";
-	document.getElementById(oldDiv).style.display = "none";
-} */
-
-function swapDiv(newDiv) {
+   function swapDiv(newDiv) {
 	var i, content;
 	content = document.getElementsByClassName("content");
 	for (i = 0; i < content.length; i++) {
