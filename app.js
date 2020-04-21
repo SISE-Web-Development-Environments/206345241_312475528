@@ -6,23 +6,137 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var up;
+var down;
+var left;
+var right;
+var foodAmount;
+var fivepointsColor;
+var fifteenpointsColor;
+var twenyfivepointsColor;
+var time;
+var monsters;
+var rand;
+var oldKeyPressedNum;
 
-$(document).ready(function() {
+
+$(document).ready(function () {
 	context = canvas.getContext("2d");
-/* 	$('#settingsForm').submit(function () {
-		//initDeails();
-	}); */
-	Start();
+	oldKeyPressedNum=4;
+		initDeails();
+		swapDiv('game');
+		Start();
 });
+
+function initDeails() {
+
+	$("form[name='settingsForm']").validate({
+		rules: {
+			up: "required",
+			down: "required",
+			left: "required",
+			right: "required",
+			food: "required",
+			fivepointsColor: "required",
+			fifteenpointsColor: "required",
+			twentyfivepointsColor: "required",
+			time: "required",
+			monsters: "required"
+		},
+		messages: {
+			up: "required",
+			down: "required",
+			left: "required",
+			right: "required",
+			food: "required",
+			fivepointsColor: "required",
+			fifteenpointsColor: "required",
+			twentyfivepointsColor: "required",
+			time: "required",
+			monsters: "required"
+
+		},
+		submitHandler: function (form) {
+			if(!rand){
+				saveDetails();
+				form.submit();
+			}
+
+		}
+
+	});
+}
+function saveDetails() {
+
+	foodAmount = $('#settingsForm').find('input[name="food"]').val();
+	fivepoints = $('#settingsForm').find('input[name="fivepoints"]').val();
+	fifteenpoints = $('#settingsForm').find('input[name="fifteenpoints"]').val();
+	twenyfivepoints = $('#settingsForm').find('input[name="twentyfivepoints"]').val();
+	time = $('#settingsForm').find('input[name="time"]').val();
+	monsters = $('#settingsForm').find('input[name="monsters"]').val();
+	start_time = new Date();
+
+}
+
+function setUp() {
+	up = event.keyCode;//init the result
+	document.getElementById("up").value = event.key;//present thr result
+}
+function setDown() {
+	down = event.keyCode;//init the result
+	document.getElementById("down").value = event.key;//present thr result
+}
+function setLeft() {
+	left = event.keyCode;//init the result
+	document.getElementById("left").value = event.key;//present thr result
+}
+function setRight() {
+	right = event.keyCode;//init the result
+	document.getElementById("right").value = event.key;//present thr result
+}
+function randomNumberInRange(min, max) {
+	return Math.random() * (max - min) + min;
+  }
+
+function randomDetails() {
+
+	foodAmount = randomNumberInRange(50,90);
+	fivepointsColor = "blue";
+	fifteenpointsColor = "red";
+	twenyfivepointsColor = "green";//?????????????????????
+	/* time = randomNumberInRange(60,10000); */
+	time = 50;
+	monsters = randomNumberInRange(1,4);
+	up=38;
+	down=40;
+	left=37;
+	right=39;
+	rand=true;
+	start_time = new Date();
+	swapDiv('game');
+	Start();
+}
+function swapDiv(newDiv) {
+	var i, content;
+	content = document.getElementsByClassName("content");
+	for (i = 0; i < content.length; i++) {
+		content[i].style.display = "none";
+	}
+	document.getElementById(newDiv).style.display = "block";
+  
+  }
 
 function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = foodAmount;
+	var fivepoints = Math.floor(foodAmount * 0.6) -1;
+	var fifteenpoints  = Math.floor(foodAmount * 0.3) -1;
+	var twentyfivepoints  = Math.floor(foodAmount * 0.1) -1;//?????????????
 	var pacman_remain = 1;
-	start_time = new Date();
+	//fistart_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -60,19 +174,19 @@ function Start() {
 	keysDown = {};
 	addEventListener(
 		"keydown",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = false;
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -110,27 +224,19 @@ function Draw(direction) {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {//pacman
-				context.beginPath();
 				if(direction==1){//up
-					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					pacmanUp(center);
 				}
 				if(direction==2){//down
-					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					pacmanDown(center);
 				}
+				
 				if(direction==3){//left
-					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					pacmanLeft(center);
 				}
-				if(direction==4){//right
-					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				if (direction == 4){//right
+					pacmanRight(center);
 				}
-
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "blue"; //color
-				context.fill();
 			} else if (board[i][j] == 1) {//food
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -149,6 +255,9 @@ function Draw(direction) {
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
+	if((x==1||x==2||x==3||x==4)&&x!=oldKeyPressedNum){
+		oldKeyPressedNum=x;
+	}
 	if (x == 1) {//up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -181,7 +290,62 @@ function UpdatePosition() {
 	if (score == 50) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
-	} else {
-		Draw(1);
-	}
+	} 
+	else {
+		if(x==1||x==2||x==3||x==4)
+			Draw(x);
+		else{
+			Draw(oldKeyPressedNum);
+	}	}
+}
+
+
+function pacmanRight(center) {
+	context.beginPath();
+	context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle - right
+	context.lineTo(center.x, center.y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+	context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle right 
+	context.fillStyle = "blue"; //color
+	context.fill();
+}
+
+function pacmanDown(center) {
+	context.beginPath();
+	context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle - down
+	context.lineTo(center.x, center.y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+	context.arc(center.x-15, center.y+5, 5, 0, 2 * Math.PI); // circle down - finish 
+	context.fillStyle = "blue"; //color
+	context.fill();
+}
+
+function pacmanLeft(center) {
+	context.beginPath();
+	context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle - left
+	context.lineTo(center.x, center.y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+	context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // circle left - finish
+	context.fillStyle = "blue"; //color
+	context.fill();
+	
+}
+
+function pacmanUp(center) {
+	context.beginPath();
+	context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle - up
+	context.lineTo(center.x, center.y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+	context.arc(center.x+15, center.y-5, 5, 0, 2 * Math.PI); // circle up - finish
+	context.fillStyle = "blue"; //color
+	context.fill();
+	
 }
