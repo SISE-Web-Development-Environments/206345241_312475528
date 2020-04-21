@@ -128,19 +128,19 @@
 
 					<p>
 						<label for="up">up</label>
-						<input id="up" name="up" type="text">
+						<input id="up" name="up" type="text" onkeydown="setUp()" autocomplete="off">
 					</p>
 					<p>
 						<label for="down">down</label>
-						<input id="down" name="down" type="text">
+						<input id="down" name="down" type="text" onkeydown="setDown()" autocomplete="off">
 					</p>
 					<p>
 						<label for="left">left</label>
-						<input id="left" name="left" type="text">
+						<input id="left" name="left" type="text" onkeydown="setLeft()" autocomplete="off">
 					</p>
 					<p>
 						<label for="right">right</label>
-						<input id="right" name="right" type="text">
+						<input id="right" name="right" type="text" onkeydown="setRight()" autocomplete="off">
 					</p>
 					<p>
 						<label for="food">food (between 50 and 90)</label>
@@ -148,16 +148,17 @@
 					</p>
 
 					<p>
-						<label for="food-color-5 points"> food-color-5 points</label>
-						<input id="food-color-5 points" name="food-color-5 points" type="text">
+						<label for="fivepointsColor"> five points Color</label>
+						<input id="fivepointsColor" name="fivepointsColor" type="color"
+						>
 					</p>
 					<p>
-						<label for="food-color-15 points"> food-color-15 points</label>
-						<input id="food-color-15 points" name="food-color-15 points" type="text">
+						<label for="fifteenpointsColor"> fifteen points Color</label>
+						<input id="fifteenpointsColor" name="fifteenpointsColor" type="color">
 					</p>
 					<p>
-						<label for="food-color-25 points"> food-color-25 points</label>
-						<input id="food-color-25 points" name="food-color-25 points" type="text">
+						<label for="twentyfivepointsColor"> twentyfive points Color</label>
+						<input id="twentyfivepointsColor" name="twentyfivepointsColor" type="color">
 					</p>
 
 					<p>
@@ -169,7 +170,7 @@
 						<input id="monsters" name="monsters" type="text">
 					</p>
 
-					<button class="" onclick="">random</button>
+					<button class="" onclick="randomDetails()">random</button>
 
 					<p>
 						<input class="submit" type="submit" value="Submit">
