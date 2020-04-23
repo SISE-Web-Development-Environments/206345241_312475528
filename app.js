@@ -6,6 +6,8 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var intervalMonsters;
+var intervalExtraFifty;
 var up;
 var down;
 var left;
@@ -20,6 +22,7 @@ var rand = false;
 var oldKeyPressedNum;
 var monsters;
 var life;
+var extraFifty = new Object();
 
 
 $(document).ready(function () {
@@ -112,8 +115,7 @@ function randomDetails() {
 	twenyfivepointsColor = "green";//?????????????????????
 	/* time = randomNumberInRange(60,10000); */
 	time = 50;
-	//monstersAmount = randomNumberInRange(1, 4);
-	monstersAmount = 1;
+	monstersAmount = randomNumberInRange(1, 4);
 	up = 38;
 	down = 40;
 	left = 37;
@@ -135,7 +137,7 @@ function swapDiv(newDiv) {
 function initMonsters() {
 	monsters = new Array();
 	if (monstersAmount > 0) {
-		if (board[0][0] != 0 && board[0][0] != 5) {
+		if (board[0][0] != 0 && board[0][0] != 5) { // there was food or pacman there
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = board[0][0];
 		}
@@ -145,7 +147,7 @@ function initMonsters() {
 
 		monsters[0].x = 0;
 		monsters[0].y = 0;
-		monsters[0].z = 0;
+		monsters[0].z = 5;
 		board[0][0] = 5;
 	}
 	if (monstersAmount > 1) {
@@ -159,7 +161,7 @@ function initMonsters() {
 
 		monsters[1].x = 9;
 		monsters[1].y = 0;
-		monsters[1].z = 0;
+		monsters[1].z = 5;
 		board[9][0] = 5;
 	}
 	if (monstersAmount > 2) {
@@ -173,7 +175,7 @@ function initMonsters() {
 
 		monsters[2].x = 0;
 		monsters[2].y = 9;
-		monsters[2].z = 0;
+		monsters[2].z = 5;
 		board[0][9] = 5;
 	}
 	if (monstersAmount > 3) {
@@ -187,7 +189,7 @@ function initMonsters() {
 
 		monsters[3].x = 9;
 		monsters[3].y = 9;
-		monsters[3].z = 0;
+		monsters[3].z = 5;
 		board[9][9] = 5;
 	}
 }
@@ -249,6 +251,13 @@ function Start() {
 		twentyfivepoints--;
 	}
 	initMonsters();
+
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 3; //extreFifty
+	extraFifty.i = emptyCell[0];
+	extraFifty.j = emptyCell[1];
+	extraFifty.z = 3; 
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -264,7 +273,9 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 400);
+	interval = setInterval(UpdatePosition, 250);
+	intervalMonsters = setInterval(moveMonsters, 600);
+	intervalExtraFifty = setInterval(moveExtraFifty, 400);
 }
 
 function findRandomEmptyCell(board) {
@@ -336,6 +347,12 @@ function Draw(direction) {
 				context.fillStyle = twenyfivepointsColor; //color
 				context.fill();
 			}
+			else if (board[i][j] == 3) {//extraFifty
+				context.beginPath();
+				context.arc(center.x, center.y, 20, 0, 2 * Math.PI); // circle
+				context.fillStyle = "gold"; //color
+				context.fill();
+			}
 
 			else if (board[i][j] == 4) { //walls
 				context.beginPath();
@@ -397,10 +414,17 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 1.3) {
 		score += 25;
 	}
-	if (board[shape.i][shape.j] == 5) {//monster
-		//board[shape.i][shape.j] = 0;
+	if (board[shape.i][shape.j] == 3) {
+		score += 50;
+		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
+		window.clearInterval(intervalExtraFifty);
+
+	}
+	if (board[shape.i][shape.j] == 5) {//pacman meet monster
+		board[shape.i][shape.j] = 0;
 		deleteMonsters();
 		initMonsters();
+		//cleanPacman();
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2; //pacmam
 		shape.i = emptyCell[0];
@@ -409,7 +433,7 @@ function UpdatePosition() {
 		life--;
 	}
 	else {
-		board[shape.i][shape.j] = 2;
+		board[shape.i][shape.j] = 2; //pacman
 	}
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
@@ -442,7 +466,7 @@ function UpdatePosition() {
 			Draw(oldKeyPressedNum);
 		} */
 		Draw(oldKeyPressedNum);
-		moveMonsters();
+//		moveMonsters();
 
 
 
@@ -453,16 +477,17 @@ function UpdatePosition() {
 function moveMonsters(){
 
 	for(var k=0; k<monsters.length; k++){
-		if(board[monsters[k].i][monsters[k].j] != 5){//no monster was there
+		if( monsters[k].z == 1.1 ||  monsters[k].z == 1.2 ||  monsters[k].z == 1.3  ){//there was food before
+
 			board[monsters[k].i][monsters[k].j] = monsters[k].z; //update the prev values
 		}else
 			board[monsters[k].i][monsters[k].j] = 0; //update the prev values
 
-//		monsters[k].x = monsters[k].i;//keep the col where the monster was
-//		monsters[k].y = monsters[k].j;//keep the row where the monster was
+		//monsters[k].x = monsters[k].i;//keep the col where the monster was
+		//monsters[k].y = monsters[k].j;//keep the row where the monster was
 
 		if(monsters[k].j < shape.j ){ //monster above pacman
-			if(board[monsters[k].i][monsters[k].j+1] != 4){ // no wall
+			if(board[monsters[k].i][monsters[k].j+1] < 4){ // no wall or monster
 				
 				monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
 
@@ -488,7 +513,7 @@ function moveMonsters(){
 		}
 		
 		else if(monsters[k].j > shape.j ){ //monster under pacman
-			if(board[monsters[k].i][monsters[k].j-1] !=4){ //no wall
+			if(board[monsters[k].i][monsters[k].j-1] < 4){ //no wall or monster
 
 				monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
 
@@ -515,7 +540,7 @@ function moveMonsters(){
 		else{ // same row
 
 			if(monsters[k].i < shape.i ){ //monster left to pacman
-				if(board[monsters[k].i+1][monsters[k].j] !=4){ //no wall
+				if(board[monsters[k].i+1][monsters[k].j] < 4){ //no wall or monster
 
 					monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
 
@@ -541,7 +566,7 @@ function moveMonsters(){
 			}
 			
 			else if(monsters[k].i > shape.i ){ //monster right to pacman
-				if(board[monsters[k].i-1][monsters[k].j] !=4){ //no wall
+				if(board[monsters[k].i-1][monsters[k].j] < 4){ //no wall or monster
 
 					monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value
 
@@ -565,31 +590,81 @@ function moveMonsters(){
 					}
 				}
 			}
-			else{ //same plase -> monsters[k].i == shape.i && monsters[k].j == shape.j
-
+			/*else{ //same plase -> monsters[k].i == shape.i && monsters[k].j == shape.j
 				monsters[k].z = board[monsters[k].i][monsters[k].j];//keep the value
-
-			}
+			} */
 		}
+
+		if(monsters[k].i == shape.i && monsters[k].j == shape.j){ //same plase after the move of the monster
+			deleteMonsters();
+			board[shape.i][shape.j] = 0;
+			initMonsters();
+			var emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = 2; //pacmam
+			shape.i = emptyCell[0];
+			shape.j = emptyCell[1];
+			score -= 10;
+			life--;
+		}
+
 		board[monsters[k].i][monsters[k].j] = 5;
 	}
 }
+
 function deleteMonsters(){
 
 	for(var k=0; k<monsters.length; k++){
 
-		if(board[monsters[k].i][monsters[k].j] == 5){//no monster was there
-			if( monsters[k].z != 2){
-				board[monsters[k].i][monsters[k].j] = monsters[k].z; //update the prev values
+		if(board[monsters[k].i][monsters[k].j] == 5){//monster was there
+			if( monsters[k].z != 2){  //no pacman was there
+				board[monsters[k].i][monsters[k].j] = monsters[k].z; //update the prev values --> to keep the food
 			}
-			else{
-				board[monsters[k].i][monsters[k].j] = 0; //update the prev values
+			else{ // there was pacman --> clean it
+				board[monsters[k].i][monsters[k].j] = 0;
 			}
 
 		}
 	}
 }
 
+function moveExtraFifty(){
+
+	if( extraFifty.z == 1.1 ||  extraFifty.z == 1.2 ||  extraFifty.z == 1.3  ){//there was food before
+
+		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
+	}else{
+		board[extraFifty.i][extraFifty.j] = 0; //reset
+	}
+
+
+	let num = Math.floor(randomNumberInRange(1,5));
+
+	if( num == 1){ // up
+		if( board[extraFifty.i][extraFifty.j-1] < 4  &&  extraFifty.j > 0 ){ // can go up
+			extraFifty.z = board[extraFifty.i][extraFifty.j-1];//keep the value
+			extraFifty.j--;
+		}
+	}
+	if( num == 2){ // down
+		if( board[extraFifty.i][extraFifty.j+1] < 4  &&  extraFifty.j < 9 ){ // can go up
+			extraFifty.z = board[extraFifty.i][extraFifty.j+1];//keep the value
+			extraFifty.j++;
+		}
+	}
+	if( num == 3){ // left
+		if( board[extraFifty.i-1][extraFifty.j] < 4  &&  extraFifty.i > 0 ){ // can go up
+			extraFifty.z = board[extraFifty.i-1][extraFifty.j];//keep the value
+			extraFifty.i--;
+		}
+	}
+	if( num == 4){ // right
+		if( board[extraFifty.i+1][extraFifty.j] < 4  &&  extraFifty.i < 9 ){ // can go up
+			extraFifty.z = board[extraFifty.i+1][extraFifty.j];//keep the value
+			extraFifty.i++;
+		}
+	}
+	board[extraFifty.i][extraFifty.j] = 3;
+}
 
 function pacmanRight(center) {
 	context.beginPath();
