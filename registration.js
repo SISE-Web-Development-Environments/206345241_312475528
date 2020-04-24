@@ -71,10 +71,10 @@ $(document).ready(function () {
 		submitHandler: function (form) {
 			saveNameAndPassword();
 			form.submit();
-
+			swapDiv('login');
 		}
+	
 	});
-
 
 });
 
@@ -99,7 +99,7 @@ function swapDiv(newDiv) {
 function saveNameAndPassword() 
    {
 	let username = $('#signupForm').find('input[name="username"]').val();
-	let password = $('#signupForm').find('input[name="password"]').val()
+	let password = $('#signupForm').find('input[name="password"]').val();
 	localStorage.setItem(username, password);
 
 //	let username=$('#signupForm').getElementById("username");
