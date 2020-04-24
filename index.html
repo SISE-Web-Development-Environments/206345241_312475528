@@ -34,10 +34,10 @@
 
 </script>
 	<div id="menu">
-		<button class="tablink" onclick="swapDiv('welcome')">welcome</button>
-		<button class="tablink" onclick="swapDiv('registration')">registration</button>
-		<button class="tablink" onclick="swapDiv('login')">login</button>
-		<button class="tablink" onclick="swapDiv('settings')">settings</button>
+		<button class="tablink" onclick="swapDiv('welcome')" type="button">welcome</button>
+		<button class="tablink" onclick="swapDiv('registration')" type="button">registration</button>
+		<button class="tablink" onclick="swapDiv('login')" type="button">login</button>
+		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
 <!-- 		<button class="tablink" onclick="swapDiv('about')" rel="modal:open">about</button>-->
 
  		<button class="tablink"> <a href="#about" rel="modal:open">about</a></button>
@@ -51,13 +51,12 @@
 			<br>
 			<br>
 			<button onclick="swapDiv('registration')" id="regButton" class="wlc-btn"
-				value="Click To Open registration">Click To
-				Open registration</button>
+				value="Click To Open registration" type="button">
+				Click To Open registration</button>
 			<br>
 			<br>
-			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page">Click
-				To Open
-				login page</button>
+			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page" type="button">
+				Click To Open login page</button>
 
 		</div>
 
@@ -91,7 +90,7 @@
 						<input id="date" name="date" type="date">
 					</p>
 					<p>
-						<input class="submit" type="submit" value="Submit">
+						<input class="submit" type="submit" value="Submit" >
 					</p>
 				</fieldset>
 
@@ -161,6 +160,8 @@
 						<input id="twentyfivepointsColor" name="twentyfivepointsColor" type="color">
 					</p>
 
+					<label id="differentColors" style="display: none;"> all the colors need to be different from each other</label>
+
 					<p>
 						<label for="time">time fot the game (min 60 seconds)</label>
 						<input id="time" name="time" type="text">
@@ -204,6 +205,11 @@
 				<label for="lblLife">Life:</label>
 				<input id="lblLife" type="text" />
 			</div>
+
+			<div id="life">
+				<button id="newgame" onclick="newGame()">new Game</button>
+			</div>
+
 			<div id="game">
 				<canvas id="canvas" height="600" width="600"></canvas>
 			</div>
