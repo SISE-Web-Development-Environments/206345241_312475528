@@ -23,6 +23,7 @@ var oldKeyPressedNum;
 var monsters;
 var life;
 var extraFifty = new Object();
+var flag;
 
 
 $(document).ready(function () {
@@ -35,36 +36,70 @@ $(document).ready(function () {
 
 function initDeails() {
 
+	$.validator.addMethod("checkfoodAmount", function(value) {
+		return (value <= 90 && value >= 50); 
+		
+	 });
+	 $.validator.addMethod("checkTime", function(value) {
+		return (value >= 60 ); 
+		
+	 });
+	 $.validator.addMethod("checkMonsters", function(value) {
+		return (value <= 4 && value >= 1); 
+		
+	 });
+
 	$("form[name='settingsForm']").validate({
 		rules: {
 			up: "required",
 			down: "required",
 			left: "required",
 			right: "required",
-			food: "required",
+			food: {
+				required: true,
+				checkfoodAmount: true
+			},
 			fivepointsColor: "required",
 			fifteenpointsColor: "required",
 			twentyfivepointsColor: "required",
-			time: "required",
-			monsters: "required"
+			time: {
+				required: true,
+				checkTime: true
+			},
+			monsters: {
+				required: true,
+				checkMonsters: true
+			}
 		},
 		messages: {
 			up: "required",
 			down: "required",
 			left: "required",
 			right: "required",
-			food: "required",
+			food: {
+				required: "This field cannot be empty",
+				checkfoodAmount: "the amount should be between 50 to 90"
+			},			
 			fivepointsColor: "required",
 			fifteenpointsColor: "required",
 			twentyfivepointsColor: "required",
-			time: "required",
-			monsters: "required"
-
+			time: {
+				required: "This field cannot be empty",
+				checkTime: "the amount should be above 60"
+			},	
+			monsters: {
+				required: "This field cannot be empty",
+				checkMonsters:  "the amount should be between 1 to 4"
+			}
 		},
 		submitHandler: function (form) {
 			if (!rand) {
 
-				saveDetails();
+				flag = saveDetails();
+				if(!flag)
+				{
+					return false;
+				}
 				//form.submit();
 
 			}
@@ -74,17 +109,21 @@ function initDeails() {
 	});
 }
 function saveDetails() {
-
+	debugger;
 	foodAmount = $('#settingsForm').find('input[name="food"]').val();
 	fivepointsColor = $('#settingsForm').find('input[name="fivepointsColor"]').val();
 	fifteenpointsColor = $('#settingsForm').find('input[name="fifteenpointsColor"]').val();
 	twenyfivepointsColor = $('#settingsForm').find('input[name="twentyfivepointsColor"]').val();
-	time = $('#settingsForm').find('input[name="time"]').val();
-	monstersAmount = $('#settingsForm').find('input[name="monsters"]').val();
-	start_time = new Date();
-	swapDiv('game');
-	Start();
-
+	if(fivepointsColor==fifteenpointsColor || fivepointsColor==twenyfivepointsColor || fifteenpointsColor==twenyfivepointsColor){
+		document.getElementById("differentColors").style.display = "block";
+		return false;
+	}
+		time = $('#settingsForm').find('input[name="time"]').val();
+		monstersAmount = $('#settingsForm').find('input[name="monsters"]').val();
+		start_time = new Date();
+		swapDiv('game');
+		Start();
+	
 }
 
 function setUp() {
@@ -110,12 +149,13 @@ function randomNumberInRange(min, max) {
 function randomDetails() {
 
 	foodAmount = randomNumberInRange(50, 90);
-	fivepointsColor = "blue";
-	fifteenpointsColor = "red";
-	twenyfivepointsColor = "green";//?????????????????????
+	fivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
+	fifteenpointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
+	twenyfivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	/* time = randomNumberInRange(60,10000); */
 	time = 50;
 	monstersAmount = randomNumberInRange(1, 4);
+	//monstersAmount = 2;
 	up = 38;
 	down = 40;
 	left = 37;
@@ -205,7 +245,7 @@ function Start() {
 	var twentyfivepoints = Math.floor(foodAmount * 0.1);//?????????????
 	var pacman_remain = 1;
 	life = 5;
-	//fistart_time = new Date();
+	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -424,7 +464,6 @@ function UpdatePosition() {
 		board[shape.i][shape.j] = 0;
 		deleteMonsters();
 		initMonsters();
-		//cleanPacman();
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2; //pacmam
 		shape.i = emptyCell[0];
@@ -442,36 +481,31 @@ function UpdatePosition() {
 	}
 	if (score == 200) {
 		window.clearInterval(interval);
+		window.clearInterval(intervalMonsters);
 		window.alert("Game completed");
 	}
 	if (life == 0) {//lose
 		window.clearInterval(interval);
+		window.clearInterval(intervalMonsters);
 		window.alert("Loser!");
 	}
 	if (time_elapsed == time) {//lose
 		if (score < 100) {
 			window.clearInterval(interval);
+			window.clearInterval(intervalMonsters);
 			window.alert("You are better than " + score + " points!");
 		}
 		else {
 			window.clearInterval(interval);
+			window.clearInterval(intervalMonsters);
 			window.alert("Winner!!!");
 		}
 
 	}
 	else {
-/* 		if (x == 1 || x == 2 || x == 3 || x == 4)
-			Draw(x);
-		else {
-			Draw(oldKeyPressedNum);
-		} */
 		Draw(oldKeyPressedNum);
-//		moveMonsters();
-
-
-
 	}
-	
+
 }
 
 function moveMonsters(){
@@ -487,7 +521,7 @@ function moveMonsters(){
 		//monsters[k].y = monsters[k].j;//keep the row where the monster was
 
 		if(monsters[k].j < shape.j ){ //monster above pacman
-			if(board[monsters[k].i][monsters[k].j+1] < 4){ // no wall or monster
+			if(board[monsters[k].i][monsters[k].j+1] < 3){ // no wall or monster or 50
 				
 				monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
 
@@ -513,7 +547,7 @@ function moveMonsters(){
 		}
 		
 		else if(monsters[k].j > shape.j ){ //monster under pacman
-			if(board[monsters[k].i][monsters[k].j-1] < 4){ //no wall or monster
+			if(board[monsters[k].i][monsters[k].j-1] < 3){ //no wall or monster or 50
 
 				monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
 
@@ -540,7 +574,7 @@ function moveMonsters(){
 		else{ // same row
 
 			if(monsters[k].i < shape.i ){ //monster left to pacman
-				if(board[monsters[k].i+1][monsters[k].j] < 4){ //no wall or monster
+				if(board[monsters[k].i+1][monsters[k].j] < 3){ //no wall or monster or 50
 
 					monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
 
@@ -566,7 +600,7 @@ function moveMonsters(){
 			}
 			
 			else if(monsters[k].i > shape.i ){ //monster right to pacman
-				if(board[monsters[k].i-1][monsters[k].j] < 4){ //no wall or monster
+				if(board[monsters[k].i-1][monsters[k].j] < 3){ //no wall or monster or 50
 
 					monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value
 
@@ -664,6 +698,15 @@ function moveExtraFifty(){
 		}
 	}
 	board[extraFifty.i][extraFifty.j] = 3;
+}
+
+
+function newGame(){
+	window.clearInterval(interval);
+	window.clearInterval(intervalMonsters);
+	window.clearInterval(intervalExtraFifty);
+	//start_time = new Date();
+	Start();
 }
 
 function pacmanRight(center) {
