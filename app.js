@@ -27,7 +27,7 @@ var medications;
 var clock = new Object();
 var flag;
 var timeGame;
-//var song = document.getElementById("myAudio");
+var song;
 
 
 
@@ -278,7 +278,7 @@ function showSettings(){
 
 }
 
-/* 
+
 function playAudio() { 
   song.play(); 
 } 
@@ -286,8 +286,10 @@ function playAudio() {
 function pauseAudio() { 
   song.pause(); 
 } 
- */
+
 function Start() {
+	song = document.getElementById("myAudio");
+	playAudio();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
