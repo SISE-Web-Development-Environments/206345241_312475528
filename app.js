@@ -23,7 +23,12 @@ var oldKeyPressedNum;
 var monsters;
 var life;
 var extraFifty = new Object();
+var medications;
+var clock = new Object();
 var flag;
+var timeGame;
+//var song = document.getElementById("myAudio");
+
 
 
 $(document).ready(function () {
@@ -128,7 +133,7 @@ function saveDetails() {
 
 function setUp() {
 	up = event.keyCode;//init the result
-	document.getElementById("up").value = event.key;//present thr result
+	document.getElementById("up").value = event.key;//present the result
 }
 function setDown() {
 	down = event.keyCode;//init the result
@@ -148,13 +153,14 @@ function randomNumberInRange(min, max) {
 
 function randomDetails() {
 
-	foodAmount = randomNumberInRange(50, 90);
+	foodAmount =  Math.floor(randomNumberInRange(50,91));
+
 	fivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	fifteenpointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	twenyfivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	/* time = randomNumberInRange(60,10000); */
 	time = 50;
-	monstersAmount = randomNumberInRange(1, 4);
+	monstersAmount = Math.floor(randomNumberInRange(1, 5));
 	//monstersAmount = 2;
 	up = 38;
 	down = 40;
@@ -177,63 +183,110 @@ function swapDiv(newDiv) {
 function initMonsters() {
 	monsters = new Array();
 	if (monstersAmount > 0) {
-		if (board[0][0] != 0 && board[0][0] != 5) { // there was food or pacman there
+/* 		if (board[0][0] != 0 && board[0][0] != 5) { // there was food or pacman there
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = board[0][0];
-		}
+		} */
 		monsters[0] = new Object();
 		monsters[0].i = 0;
 		monsters[0].j = 0;
 
 		monsters[0].x = 0;
 		monsters[0].y = 0;
-		monsters[0].z = 5;
+		monsters[0].z = board[0][0];
 		board[0][0] = 5;
 	}
 	if (monstersAmount > 1) {
-		if (board[9][0] != 0 && board[9][0] != 5) {
+/* 		if (board[9][0] != 0 && board[9][0] != 5) {
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = board[9][0];
-		}
+		} */
 		monsters[1] = new Object();
 		monsters[1].i = 9;
 		monsters[1].j = 0;
 
 		monsters[1].x = 9;
 		monsters[1].y = 0;
-		monsters[1].z = 5;
+		monsters[1].z = board[9][0];
 		board[9][0] = 5;
 	}
 	if (monstersAmount > 2) {
-		if (board[0][9] != 0 && board[0][9] != 5) {
+/* 		if (board[0][9] != 0 && board[0][9] != 5) {
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = board[0][9];
-		}
+		} */
 		monsters[2] = new Object();
 		monsters[2].i = 0;
 		monsters[2].j = 9;
 
 		monsters[2].x = 0;
 		monsters[2].y = 9;
-		monsters[2].z = 5;
+		monsters[2].z = board[0][9];
 		board[0][9] = 5;
 	}
 	if (monstersAmount > 3) {
-		if (board[9][9] != 0 && board[9][9] != 5) {
+/* 		if (board[9][9] != 0 && board[9][9] != 5) {
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = board[9][9];
-		}
+		} */
 		monsters[3] = new Object();
 		monsters[3].i = 9;
 		monsters[3].j = 9;
 
 		monsters[3].x = 9;
 		monsters[3].y = 9;
-		monsters[3].z = 5;
+		monsters[3].z = board[9][9];
 		board[9][9] = 5;
 	}
 }
 
+function initMedications(){
+	medications = new Array();	
+	var medicationsAmount = Math.floor(randomNumberInRange(1,3));
+	for(let k=0; k<medicationsAmount; k++){
+		medications[k] = new Object();
+		var emptyCell = findRandomCell(board);
+		medications[k].z = board[emptyCell[0]][emptyCell[1]];
+		board[emptyCell[0]][emptyCell[1]] = 2.5;
+		medications[k].i = emptyCell[0];
+		medications[k].j = emptyCell[1];
+	}
+}
+function showSettings(){
+
+	if(rand){
+		lblup.value= "ArrowUp";
+		lbldown.value = "ArrowDown";
+		lblleft.value =  "ArrowLeft";
+		lblright.value =  "ArrowRight";
+	}
+	else{
+		lblup.value = document.getElementById("up").value;
+		lbldown.value = document.getElementById("down").value;
+		lblleft.value = document.getElementById("left").value;
+		lblright.value = document.getElementById("right").value;
+	}
+
+	lblfoodAmount.value = foodAmount;
+	lblfivepointsColor.value = fivepointsColor;
+	lblfifteenpointsColor.value = fifteenpointsColor;
+	lbltwenyfivepointsColor.value = twenyfivepointsColor;
+	lbltimesettings.value = timeGame;
+	lblmonstersSettings.value = monstersAmount;
+
+	
+
+}
+
+/* 
+function playAudio() { 
+  song.play(); 
+} 
+
+function pauseAudio() { 
+  song.pause(); 
+} 
+ */
 function Start() {
 	board = new Array();
 	score = 0;
@@ -245,6 +298,7 @@ function Start() {
 	var twentyfivepoints = Math.floor(foodAmount * 0.1);//?????????????
 	var pacman_remain = 1;
 	life = 5;
+	timeGame = time;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -291,13 +345,20 @@ function Start() {
 		twentyfivepoints--;
 	}
 	initMonsters();
-
+	initMedications();
+	//extraFifty
 	var emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 3; //extreFifty
 	extraFifty.i = emptyCell[0];
 	extraFifty.j = emptyCell[1];
 	extraFifty.z = 3; 
 
+	//clock
+	var cell = findRandomCell(board);
+	clock.z = board[cell[0]][cell[1]] ; 
+	board[cell[0]][cell[1]] = 2.6; //clock
+	clock.i = cell[0];
+	clock.j = cell[1];
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -313,15 +374,26 @@ function Start() {
 		},
 		false
 	);
+
 	interval = setInterval(UpdatePosition, 250);
 	intervalMonsters = setInterval(moveMonsters, 600);
 	intervalExtraFifty = setInterval(moveExtraFifty, 400);
+
 }
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
 	while (board[i][j] != 0) {
+		i = Math.floor(Math.random() * 9 + 1);
+		j = Math.floor(Math.random() * 9 + 1);
+	}
+	return [i, j];
+}
+function findRandomCell(board) {
+	var i = Math.floor(Math.random() * 9 + 1);
+	var j = Math.floor(Math.random() * 9 + 1);
+	while (board[i][j] == 4 || board[i][j] == 2) {
 		i = Math.floor(Math.random() * 9 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
@@ -387,6 +459,19 @@ function Draw(direction) {
 				context.fillStyle = twenyfivepointsColor; //color
 				context.fill();
 			}
+			else if (board[i][j] == 2.5) {//extraFifty
+				context.beginPath();
+				context.arc(center.x, center.y, 35, 0, 2 * Math.PI); // circle
+				context.fillStyle = "pink"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 2.6) {//clock
+				context.beginPath();
+				context.arc(center.x, center.y, 35, 0, 2 * Math.PI); // circle
+				context.fillStyle = "grey"; //color
+				context.fill();
+			}
+
 			else if (board[i][j] == 3) {//extraFifty
 				context.beginPath();
 				context.arc(center.x, center.y, 20, 0, 2 * Math.PI); // circle
@@ -420,6 +505,7 @@ function Draw(direction) {
 }
 
 function UpdatePosition() {
+	showSettings();
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	if ((x == 1 || x == 2 || x == 3 || x == 4) && x != oldKeyPressedNum) {
@@ -454,11 +540,23 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 1.3) {
 		score += 25;
 	}
+	if (board[shape.i][shape.j] == 2.5) {
+		life ++;
+		for(var k=0;k<medications.length;k++){
+			if(medications[k].i==shape.i && medications[k].j==shape.j){
+				board[shape.i][shape.j]=medications[k].z;
+			}
+		}
+	}
+	if (board[shape.i][shape.j] == 2.6) {
+		timeGame += 30;
+		board[clock.i][clock.j] = clock.z; //update the prev values
+	}
+
 	if (board[shape.i][shape.j] == 3) {
 		score += 50;
 		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
 		window.clearInterval(intervalExtraFifty);
-
 	}
 	if (board[shape.i][shape.j] == 5) {//pacman meet monster
 		board[shape.i][shape.j] = 0;
@@ -479,7 +577,7 @@ function UpdatePosition() {
 	if (score >= 100 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 200) {
+/* 	if (score == 200) {
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
 		window.alert("Game completed");
@@ -488,8 +586,8 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
 		window.alert("Loser!");
-	}
-	if (time_elapsed == time) {//lose
+	} */
+	if (time_elapsed == timeGame) {//lose
 		if (score < 100) {
 			window.clearInterval(interval);
 			window.clearInterval(intervalMonsters);
@@ -511,7 +609,8 @@ function UpdatePosition() {
 function moveMonsters(){
 
 	for(var k=0; k<monsters.length; k++){
-		if( monsters[k].z == 1.1 ||  monsters[k].z == 1.2 ||  monsters[k].z == 1.3  ){//there was food before
+		if( monsters[k].z == 1.1 ||  monsters[k].z == 1.2 ||  monsters[k].z == 1.3 
+			|| monsters[k].z == 2.5 || monsters[k].z == 2.6 ){//there was food or medication before
 
 			board[monsters[k].i][monsters[k].j] = monsters[k].z; //update the prev values
 		}else
@@ -530,18 +629,22 @@ function moveMonsters(){
 			else{ //wall
 
 				if(monsters[k].i < shape.i ){ //monster left to pacman
+					if(board[monsters[k].i+1][monsters[k].j] < 3){ // no wall or monster or 50
 
-					monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
+						monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
 
-					monsters[k].i++; //go right
-					
+						monsters[k].i++; //go right
+					}
+
 				}
 				
 				else { // //monster right to pacman
+					if(board[monsters[k].i-1][monsters[k].j] < 3){ // no wall or monster or 50
 
-					monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value 
+						monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value 
 
-					monsters[k].i--; // go left
+						monsters[k].i--; // go left
+					}
 				}
 			}
 		}
@@ -557,17 +660,23 @@ function moveMonsters(){
 			else{//wall
 
 				if(monsters[k].i < shape.i ){ //monster left to pacman
+					if(board[monsters[k].i+1][monsters[k].j] < 3){ // no wall or monster or 50
+						
+						monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
 
-					monsters[k].z = board[monsters[k].i+1][monsters[k].j];//keep the value
+						monsters[k].i++;//go right
+					}
 
-					monsters[k].i++;//go right
 				}
 				
 				else { // //monster right to pacman
+					if(board[monsters[k].i-1][monsters[k].j] < 3){ // no wall or monster or 50
 
-					monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value
+						monsters[k].z = board[monsters[k].i-1][monsters[k].j];//keep the value
 
-					monsters[k].i--;//go left
+						monsters[k].i--;//go left
+					}
+
 				}
 			}
 		}
@@ -584,17 +693,22 @@ function moveMonsters(){
 				else{//wall
 	
 					if(monsters[k].j > 0 ){ //monster not at the first row
+						if(board[monsters[k].i][monsters[k].j-1] < 3){ // no wall or monster or 50
+					
+							monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
 
-						monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
-
-						monsters[k].j--;//go up
+							monsters[k].j--;//go up
+						}
 					}
 					
 					else { //monster at first row
+						if(board[monsters[k].i][monsters[k].j+1] < 3){ // no wall or monster or 50
 
-						monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
+							monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
 
-						monsters[k].j++;//go down
+							monsters[k].j++;//go down
+						}
+
 					}
 				}
 			}
@@ -610,17 +724,25 @@ function moveMonsters(){
 				else{
 	
 					if(monsters[k].j > 0 ){ //monster not at the first row
+						if(board[monsters[k].i][monsters[k].j-1] < 3){ // no wall or monster or 50
+					
+							monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
 
-						monsters[k].z = board[monsters[k].i][monsters[k].j-1];//keep the value
+							monsters[k].j--;//go up
+						}
 
-						monsters[k].j--;//go up
+
 					}
 					
 					else { //monster at first row
+						if(board[monsters[k].i][monsters[k].j+1] < 3){ // no wall or monster or 50
+						
+							monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
 
-						monsters[k].z = board[monsters[k].i][monsters[k].j+1];//keep the value
+							monsters[k].j++;//go down
+						}
 
-						monsters[k].j++;//go down
+
 					}
 				}
 			}
@@ -663,7 +785,8 @@ function deleteMonsters(){
 
 function moveExtraFifty(){
 
-	if( extraFifty.z == 1.1 ||  extraFifty.z == 1.2 ||  extraFifty.z == 1.3  ){//there was food before
+	if( extraFifty.z == 1.1 ||  extraFifty.z == 1.2 ||  extraFifty.z == 1.3 
+		||  extraFifty.z == 2.5 ||  extraFifty.z == 2.6 ){//there was food before
 
 		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
 	}else{
