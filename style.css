@@ -7,8 +7,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 .btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #555;
@@ -19,7 +17,34 @@ body {font-family: Arial, Helvetica, sans-serif;}
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+  width: 10%;
+
 } 
+
+#regButton{
+  top: 70%;
+  left: 20%;
+}
+#loginButton{
+  top: 70%;
+  left: 60%;
+}
+
+  /* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -40,21 +65,7 @@ hr {
   margin-bottom: 25px;
 }
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
 
-button:hover {
-  opacity:1;
-}
 #pauseAudio{
   background-color: #f44336;
 
