@@ -14,7 +14,8 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+	<title>Pacman by Adi and Yuval</title>
+	<link rel="icon" type="image" href="logo.png">
 </head>
 
 <body>
@@ -34,12 +35,9 @@
 		<button class="tablink" onclick="swapDiv('welcome')" type="button">welcome</button>
 		<button class="tablink" onclick="swapDiv('registration')" type="button">registration</button>
 		<button class="tablink" onclick="swapDiv('login')" type="button">login</button>
-		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
-		<!-- 		<button class="tablink" onclick="swapDiv('about')" rel="modal:open">about</button>-->
-
 		<button id="tablinkAbout" class="tablink"> <a href="#about" rel="modal:open">about</a></button>
-
-		<button class="tablink" onclick="swapDiv('game')">game</button>
+ 		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
+<!--		<button class="tablink" onclick="swapDiv('game')">game</button> -->
 
 	</div>
 	<div id="content">
@@ -246,11 +244,11 @@
 					<tr>
 
 						<td> <label for="fivepointsColor">five points:</label>
-							<input id="lblfivepointsColor" type="text" value="color" /></td>
+							<input id="lblfivepointsColor" type="text"  /></td>
 						<td> <label for="fifteenpointsColor">fifteen points:</label>
-							<input id="lblfifteenpointsColor" type="text" value="color"/></td>
+							<input id="lblfifteenpointsColor" type="text"/></td>
 						<td> <label for="twenyfivepointsColor">twenyfive points:</label>
-							<input class="colorChoose" id="lbltwenyfivepointsColor" type="text" value="color"/></td>
+							<input class="colorChoose" id="lbltwenyfivepointsColor" type="text"/></td>
 
 					</tr>
 				</table>
