@@ -19,30 +19,27 @@
 
 <body>
 	<header>
-		<h1 ALIGN="center">Welcome to the pacman game</h1>
-
-		<h2 ALIGN="center">logo</h1>
-
-		<h3 ALIGN="center">by Yuval Mor Yosef and Adi Ashkenazi</h1>
+		<img id="logo" src="logo.png">
+		<strong id="headtitle"> The Pacman game by Yuval Mor Yosef- 312475528 and Adi Ashkenazi- 206345241</strong>
 
 	</header>
-<script>
-	
-	$(document).ready(function () {
-		swapDiv('welcome');
-	});
+	<script>
 
-</script>
+		$(document).ready(function () {
+			swapDiv('welcome');
+		});
+
+	</script>
 	<div id="menu">
 		<button class="tablink" onclick="swapDiv('welcome')" type="button">welcome</button>
 		<button class="tablink" onclick="swapDiv('registration')" type="button">registration</button>
 		<button class="tablink" onclick="swapDiv('login')" type="button">login</button>
 		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
-<!-- 		<button class="tablink" onclick="swapDiv('about')" rel="modal:open">about</button>-->
+		<!-- 		<button class="tablink" onclick="swapDiv('about')" rel="modal:open">about</button>-->
 
- 		<button class="tablink"> <a href="#about" rel="modal:open">about</a></button>
+		<button id="tablinkAbout" class="tablink"> <a href="#about" rel="modal:open">about</a></button>
 
- 		<button class="tablink" onclick="swapDiv('game')">game</button>
+		<button class="tablink" onclick="swapDiv('game')">game</button>
 
 	</div>
 	<div id="content">
@@ -50,12 +47,13 @@
 			<span ALIGN="center"> <b>welcome to the pacman game!</b></span>
 			<br>
 			<br>
-			<button onclick="swapDiv('registration')" id="regButton" class="wlc-btn"
-				value="Click To Open registration" type="button">
+			<button onclick="swapDiv('registration')" id="regButton" class="wlc-btn" value="Click To Open registration"
+				type="button">
 				Click To Open registration</button>
 			<br>
 			<br>
-			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page" type="button">
+			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page"
+				type="button">
 				Click To Open login page</button>
 
 		</div>
@@ -90,7 +88,7 @@
 						<input id="date" name="date" type="date">
 					</p>
 					<p>
-						<input class="submit" type="submit" value="Submit" >
+						<input class="submit" type="submit" value="Submit">
 					</p>
 				</fieldset>
 
@@ -148,8 +146,7 @@
 
 					<p>
 						<label for="fivepointsColor"> five points Color</label>
-						<input id="fivepointsColor" name="fivepointsColor" type="color"
-						>
+						<input id="fivepointsColor" name="fivepointsColor" type="color">
 					</p>
 					<p>
 						<label for="fifteenpointsColor"> fifteen points Color</label>
@@ -160,7 +157,8 @@
 						<input id="twentyfivepointsColor" name="twentyfivepointsColor" type="color">
 					</p>
 
-					<label id="differentColors" style="display: none;"> all the colors need to be different from each other</label>
+					<label id="differentColors" style="display: none;"> all the colors need to be different from each
+						other</label>
 
 					<p>
 						<label for="time">time fot the game (min 60 seconds)</label>
@@ -183,79 +181,94 @@
 		<div id="about" class="content" style="display: none;">
 			<span> <b>welcome to the about page!</b></span>
 			<p>This Packman game submmited by Yuval Mor Yosef and Adi Ashkenazi.</p>
-			<p>We used jquery modal by "AJAX" that helped us by using an existing DOM element and loading a page with AJAX.</p>
+			<p>We used jquery modal by "AJAX" that helped us by using an existing DOM element and loading a page with
+				AJAX.</p>
 			<p>Our difficulties in this project were:</p>
-			<a href="#" rel="modal:close">Close</a>	
+			<a href="#" rel="modal:close">Close</a>
 		</div>
-
 		<div id="game" class="content" style="display: none;">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="username">
-				<label for="lblUsername">Username:</label>
-				<input id="lblUsername" type="text" />
-			</div>
-			<div id="life">
-				<label for="lblLife">Life:</label>
-				<input id="lblLife" type="text" />
-			</div>
+			<div id="leftSide">
 
-			<div id="newgame">
-				<button id="newgame" onclick="newGame()">new Game</button>
-			</div>
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<div id="username">
+					<label for="lblUsername">Username:</label>
+					<input id="lblUsername" type="text" />
+				</div>
+				<div id="life">
+					<label for="lblLife">Life:</label>
+					<input id="lblLife" type="text" />
+				</div>
 
-			<div id="keys">
-				<label for="up">Up:</label>
-				<input id="lblup" type="text" />
-				<label for="down">Down:</label>
-				<input id="lbldown" type="text" />
-				<label for="left">Left:</label>
-				<input id="lblleft" type="text" />
-				<label for="right">Right:</label>
-				<input id="lblright" type="text" />
-			</div>
-			<div id ="foodsettings">
-				<label for="foodAmount">food Amount:</label>
-				<input id="lblfoodAmount" type="text" />
-				<label for="fivepointsColor">five points Color:</label>
-				<input id="lblfivepointsColor" type="text" />
-				<label for="fifteenpointsColor">fifteen points Color:</label>
-				<input id="lblfifteenpointsColor" type="text" />
-				<label for="twenyfivepointsColor">twenyfive oints Color:</label>
-				<input id="lbltwenyfivepointsColor" type="text" />
-			</div>
-			<div id="timesettings">
-				<label for="lbltimesettings">TIME Setting:</label>
-				<input id="lbltimesettings" type="text" />
-			</div>
-			<div id="monstersSettings">
-				<label for="lblmonstersSettings">monsters amount:</label>
-				<input id="lblmonstersSettings" type="text" />
-			</div>
-			<audio id="myAudio">
-				<source src="pacmanSong.mp3" type="audio/mpeg" >
+				<div id="newgame">
+					<button id="newgame" onclick="newGame()">new Game</button>
+				</div>
+				<audio id="myAudio">
+					<source src="pacmanSong.mp3" type="audio/mpeg">
 					pacman
-			  </audio>
-			  <button onclick="playAudio()" type="button">Play Audio</button>
-			<button onclick="pauseAudio()" type="button">Pause Audio</button> 
+				</audio>
+				<button id="playAudio" onclick="playAudio()" type="button">Play Audio</button>
+				<button id="pauseAudio" onclick="pauseAudio()" type="button">Pause Audio</button>
 
-
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
 			</div>
+			<div id="rightSide">
+				<table>
+					<tr>
+						<td><label for="up">Up:</label>
+							<input id="lblup" type="text" /></td>
+						<td><label for="down">Down:</label>
+							<input id="lbldown" type="text" /></td>
+						</tr>
+						<tr>
+
+						<td><label for="left">Left:</label>
+							<input id="lblleft" type="text" /></td>
+						<td><label for="right">Right:</label>
+							<input id="lblright" type="text" /></td>
+					</tr>
+
+					<tr>
+						<td> <label for="foodAmount">food Amount:</label>
+							<input id="lblfoodAmount" type="text" /></td>
+
+						<td> <label for="lbltimesettings">time Setting:</label>
+							<input id="lbltimesettings" type="text" /></td>
+							
+						<td> <label for="lblmonstersSettings">monsters amount:</label>
+							<input id="lblmonstersSettings" type="text" /></td>
+					</tr>
+					<tr>
+
+						<td> <label for="fivepointsColor">five points:</label>
+							<input id="lblfivepointsColor" type="text" /></td>
+						<td> <label for="fifteenpointsColor">fifteen points:</label>
+							<input id="lblfifteenpointsColor" type="text" /></td>
+						<td> <label for="twenyfivepointsColor">twenyfive points:</label>
+							<input class="colorChoose" id="lbltwenyfivepointsColor" type="text" /></td>
+
+					</tr>
+				</table>
+			</div>
+
 		</div>
+		<div id="playGame">
+			<canvas id="canvas" height="600" width="600"></canvas>
+		</div>
+	</div>
 	</div>
 
 	<footer>
-		<strong>details about the web </strong>
+		<strong><a href="mailto:yuvalmoryosef3@gmail.com">send mail to yuval</a></strong>
+		<br>
+		<strong><a href="mailto:adiashk@post.bgu.ac.il">send mail to adi</a></strong>
 	</footer>
 
 </body>
 
-</html> 
+</html>
