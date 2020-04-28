@@ -2,7 +2,24 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
 
 
-
+#openImg{
+  width: 70%;
+}
+.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+} 
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -121,7 +138,7 @@ header {
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 16.5%;
+  width: 20%;
 }
 
 .tablink:hover {
