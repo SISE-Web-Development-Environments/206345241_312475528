@@ -28,6 +28,10 @@ var clock = new Object();
 var flag;
 var timeGame;
 var song;
+var clockImage = new Image();
+var medicineImage = new Image();
+var extraFiftyImage = new Image();
+var monsterImage= new Image();
 
 
 
@@ -268,9 +272,22 @@ function showSettings(){
 	}
 
 	lblfoodAmount.value = foodAmount;
-	lblfivepointsColor.value = fivepointsColor;
+/* 	lblfivepointsColor.value = fivepointsColor;
 	lblfifteenpointsColor.value = fifteenpointsColor;
-	lbltwenyfivepointsColor.value = twenyfivepointsColor;
+	lbltwenyfivepointsColor.value = twenyfivepointsColor; */
+
+	document.getElementById("lblfivepointsColor").style.color = fivepointsColor;
+	document.getElementById("lblfivepointsColor").style.fontSize = "larger";
+	document.getElementById("lblfivepointsColor").style.fontStyle = "bold";
+	
+	document.getElementById("lblfifteenpointsColor").style.color = fifteenpointsColor;
+	document.getElementById("lblfifteenpointsColor").style.fontSize = "larger";
+	document.getElementById("lblfifteenpointsColor").style.fontStyle = "bold";
+
+	document.getElementById("lbltwenyfivepointsColor").style.color = twenyfivepointsColor;
+	document.getElementById("lbltwenyfivepointsColor").style.fontSize = "larger";
+	document.getElementById("lbltwenyfivepointsColor").style.fontStyle = "bold";
+
 	lbltimesettings.value = timeGame;
 	lblmonstersSettings.value = monstersAmount;
 
@@ -279,17 +296,21 @@ function showSettings(){
 }
 
 
-function playAudio() { 
+/* function playAudio() { 
   song.play(); 
 } 
 
 function pauseAudio() { 
   song.pause(); 
-} 
+}  */
 
 function Start() {
 	song = document.getElementById("myAudio");
-	playAudio();
+	clockImage = document.getElementById("myClockImage");
+	extraFiftyImage = document.getElementById("myExtraFiftyImage");
+	medicineImage = document.getElementById("myMedicineImage");
+	monsterImage = document.getElementById("myMonsterImage");
+	//playAudio();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -461,24 +482,39 @@ function Draw(direction) {
 				context.fillStyle = twenyfivepointsColor; //color
 				context.fill();
 			}
-			else if (board[i][j] == 2.5) {//extraFifty
+			/*else if (board[i][j] == 2.5) {//Medication
 				context.beginPath();
 				context.arc(center.x, center.y, 35, 0, 2 * Math.PI); // circle
 				context.fillStyle = "pink"; //color
 				context.fill();
+			}*/
+			else if (board[i][j] == 2.5) {//Medication
+				context.drawImage(medicineImage,center.x-30,center.y-30, canvas.width/10, canvas.width/10);
+
 			}
-			else if (board[i][j] == 2.6) {//clock
+			/*else if (board[i][j] == 2.6) {//clock
 				context.beginPath();
 				context.arc(center.x, center.y, 35, 0, 2 * Math.PI); // circle
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
+			*/
 
-			else if (board[i][j] == 3) {//extraFifty
+			else if (board[i][j] == 2.6) {//clock
+				
+				context.drawImage(clockImage,center.x-30,center.y-30, canvas.width/10, canvas.width/10);
+			}
+
+			/*else if (board[i][j] == 3) {//extraFifty
 				context.beginPath();
 				context.arc(center.x, center.y, 20, 0, 2 * Math.PI); // circle
 				context.fillStyle = "gold"; //color
 				context.fill();
+			}
+			*/
+			else if (board[i][j] == 3) {//extraFifty
+				context.drawImage(extraFiftyImage,center.x-30,center.y-30, canvas.width/10, canvas.width/10);
+
 			}
 
 			else if (board[i][j] == 4) { //walls
@@ -488,6 +524,7 @@ function Draw(direction) {
 				context.fill();
 			}
 
+			/*
 			else if (board[i][j] == 5) { //monster
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0, 2 * Math.PI); //  circle
@@ -501,6 +538,11 @@ function Draw(direction) {
 				context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI);//eye
 				context.fillStyle = "black"; //color
 				context.fill();
+			}*/
+
+			else if (board[i][j] == 5) { //monster
+				
+				context.drawImage(monsterImage,center.x-30,center.y-30, canvas.width/10, canvas.width/10);
 			}
 		}
 	}
