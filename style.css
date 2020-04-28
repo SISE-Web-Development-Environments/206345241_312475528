@@ -1,6 +1,8 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
 
+
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -35,6 +37,15 @@ button {
 
 button:hover {
   opacity:1;
+}
+#pauseAudio{
+  background-color: #f44336;
+
+}
+#playAudio{
+  background-color: blue;
+
+  
 }
 
 /* Extra styles for the cancel button */
@@ -86,14 +97,20 @@ button:hover {
   width: 670px;
 }
 header {
-	justify-content: space-between;
-	align-items: center;
+	/* justify-content: space-between; 
+  align-items: center;*/
   background-color: #333;
   color: wheat;
+  position: relative;
+	top: 0;
+	width: 100%;
+	height: 80px; /* Height of the footer */
+  font-size: 140%;
+  
 } 
-
-
-
+#logo{
+  height: 76px;
+}
 
 .tablink {
   background-color: #555;
@@ -110,6 +127,10 @@ header {
 .tablink:hover {
   background-color: #777;
 }
+.tablink a {
+  color: #FFFFFF;
+   text-decoration: none;
+ }
 
 /* Style the tab content */
 .content {
@@ -142,4 +163,24 @@ header {
   background: #ddd;
   color: black;
   
+}
+#leftSide{
+  float:left;
+  width: 10%;
+  text-align: center;
+
+}
+#rightSide{
+  float:right;
+  width: 20%;
+  text-align: center;
+
+}
+#playGame{
+  float:center;
+  width:69%;
+}
+.canvas{
+  border-image: blue;
+
 }
