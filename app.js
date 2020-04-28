@@ -276,8 +276,8 @@ function showSettings(){
 	lblfifteenpointsColor.value = fifteenpointsColor;
 	lbltwenyfivepointsColor.value = twenyfivepointsColor; */
 
-	document.getElementById("lblfivepointsColor").style.color = fivepointsColor;
-	document.getElementById("lblfivepointsColor").style.fontSize = "larger";
+/* 	document.getElementById("lblfivepointsColor").style.color = fivepointsColor;
+ 	document.getElementById("lblfivepointsColor").style.fontSize = "larger";
 	document.getElementById("lblfivepointsColor").style.fontStyle = "bold";
 	
 	document.getElementById("lblfifteenpointsColor").style.color = fifteenpointsColor;
@@ -286,7 +286,15 @@ function showSettings(){
 
 	document.getElementById("lbltwenyfivepointsColor").style.color = twenyfivepointsColor;
 	document.getElementById("lbltwenyfivepointsColor").style.fontSize = "larger";
-	document.getElementById("lbltwenyfivepointsColor").style.fontStyle = "bold";
+	document.getElementById("lbltwenyfivepointsColor").style.fontStyle = "bold"; */
+
+
+	document.getElementById("lblfivepointsColor").style.backgroundColor = fivepointsColor;
+	document.getElementById("lblfifteenpointsColor").style.backgroundColor = fifteenpointsColor;
+	document.getElementById("lbltwenyfivepointsColor").style.backgroundColor = twenyfivepointsColor;
+
+
+
 
 	lbltimesettings.value = timeGame;
 	lblmonstersSettings.value = monstersAmount;
