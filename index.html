@@ -36,8 +36,8 @@
 		<button class="tablink" onclick="swapDiv('registration')" type="button">registration</button>
 		<button class="tablink" onclick="swapDiv('login')" type="button">login</button>
 		<button id="tablinkAbout" class="tablink"> <a href="#about" rel="modal:open">about</a></button>
- 		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
-<!--		<button class="tablink" onclick="swapDiv('game')">game</button> -->
+		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
+		<!--		<button class="tablink" onclick="swapDiv('game')">game</button> -->
 
 	</div>
 	<div id="content">
@@ -45,14 +45,15 @@
 			<span ALIGN="center"> <b>welcome to the pacman game!</b></span>
 			<br>
 			<br>
-			<button onclick="swapDiv('registration')" id="regButton" class="wlc-btn" value="Click To Open registration"
-				type="button">
-				Click To Open registration</button>
+			<img id="openImg" src="open.png">
 			<br>
 			<br>
-			<button onclick="swapDiv('login')" id="loginButton" class="wlc-btn" value="Click To Open login page"
-				type="button">
-				Click To Open login page</button>
+			<button onclick="swapDiv('registration')" id="regButton" class="btn" type="button"> Click To Open
+				registration</button>
+			<br>
+			<br>
+			<button onclick="swapDiv('login')" id="loginButton" class="btn" type="button">Click To Open login
+				page</button>
 
 		</div>
 
@@ -222,8 +223,8 @@
 							<input id="lblup" type="text" /></td>
 						<td><label for="down">Down:</label>
 							<input id="lbldown" type="text" /></td>
-						</tr>
-						<tr>
+					</tr>
+					<tr>
 
 						<td><label for="left">Left:</label>
 							<input id="lblleft" type="text" /></td>
@@ -237,18 +238,18 @@
 
 						<td> <label for="lbltimesettings">time Setting:</label>
 							<input id="lbltimesettings" type="text" /></td>
-							
+
 						<td> <label for="lblmonstersSettings">monsters amount:</label>
 							<input id="lblmonstersSettings" type="text" /></td>
 					</tr>
 					<tr>
 
 						<td> <label for="fivepointsColor">five points:</label>
-							<input id="lblfivepointsColor" type="text"  /></td>
+							<input id="lblfivepointsColor" type="text" /></td>
 						<td> <label for="fifteenpointsColor">fifteen points:</label>
-							<input id="lblfifteenpointsColor" type="text"/></td>
+							<input id="lblfifteenpointsColor" type="text" /></td>
 						<td> <label for="twenyfivepointsColor">twenyfive points:</label>
-							<input class="colorChoose" id="lbltwenyfivepointsColor" type="text"/></td>
+							<input class="colorChoose" id="lbltwenyfivepointsColor" type="text" /></td>
 
 					</tr>
 				</table>
@@ -257,13 +258,10 @@
 			<img id="myExtraFiftyImage" src="extra50.jpeg" type="image/jpg" style="display: none;">
 			<img id="myMedicineImage" src="circleMedicine.jpeg" type="image" style="display: none;">
 			<img id="myMonsterImage" src="monsterImage.jpeg" type="gif" style="display: none;">
-		<div id="playGame">
-			<canvas id="canvas" height="600" width="600"></canvas>
+			<div id="playGame">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
 		</div>
-	</div>
-
-	</div>
-	</div>
 
 	<footer>
 		<strong><a href="mailto:yuvalmoryosef3@gmail.com">send mail to yuval</a></strong>
