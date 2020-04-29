@@ -194,21 +194,25 @@ header {
 }
 #leftSide{
   float:left;
-  width: 10%;
+  width: 15%;
   text-align: center;
+  outline: black 3px solid;
+
 
 }
 #rightSide{
   float:right;
   width: 20%;
   text-align: center;
+  outline: black 3px solid;
+
 
 }
 #playGame{
   float:center;
-  width:69%;
-}
-.canvas{
-  border-image: blue;
+  width:64%;
 
+}
+.btnset{
+  width: 50%;
 }
