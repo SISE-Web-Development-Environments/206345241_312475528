@@ -6,11 +6,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width: 70%;
 }
 .btn {
-  position: absolute;
-  transform: translate(-50%, -50%);
+ position: absolute;
+   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
+  background-color: rgb(187, 105, 173);
+  color: rgb(156, 221, 233);
   font-size: 16px;
   padding: 12px 24px;
   border: none;
@@ -18,19 +18,25 @@ body {font-family: Arial, Helvetica, sans-serif;}
   border-radius: 5px;
   text-align: center;
   width: 10%;
+  font-weight: bold;
+  font-size: xx-large;
 
 } 
 
 #regButton{
   top: 70%;
-  left: 20%;
+  left: 30%;
+  width: 15%;
+  height: 10%;
+  
 }
 #loginButton{
   top: 70%;
-  left: 60%;
+  left: 70%;
+  width: 15%;
+  height: 10%;
 }
 
-  /* Set a style for all buttons */
 button {
   background-color: #4CAF50;
   color: white;
@@ -39,15 +45,15 @@ button {
   border: none;
   cursor: pointer;
   width: 20%;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 button:hover {
-  opacity:1;
+  opacity:0.8;
 }
 /* Full-width input fields */
 input[type=text], input[type=password] {
-  width: 100%;
+  width: 50%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -106,13 +112,7 @@ hr {
      width: 100%;
   }
 }
-#regButton{
-  width: 50%;
-}
 
-#loginButton{
-  width: 50%;
-}
 #signupForm {
   width: 670px;
 }
