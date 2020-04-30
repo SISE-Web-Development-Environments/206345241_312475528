@@ -103,13 +103,13 @@ function initDeails() {
 		},
 		submitHandler: function (form) {
 
-			saveDetails();
+		//	saveDetails();
 
-/* 			flag = saveDetails();
+			flag = saveDetails();
 			if(!flag)
 			{
 				return false;
-			} */
+			}
 
 /* 			if (!rand) {
  
@@ -182,10 +182,10 @@ function randomDetails() {
 	start_time = new Date();
 	swapDiv('game');
 	Start(); */
-	document.getElementById("food").value=  Math.floor(randomNumberInRange(50,91));
-	document.getElementById("fivepointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
-	document.getElementById("fifteenpointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
-	document.getElementById("twentyfivepointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("food").value = Math.floor(randomNumberInRange(50,91));
+	document.getElementById("fivepointsColor").value = "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("fifteenpointsColor").value = "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("twentyfivepointsColor").value = "#"+((1<<24)*Math.random()|0).toString(16);
 	document.getElementById("time").value =  randomNumberInRange(60,1000); 
 	document.getElementById("monsters").value = Math.floor(randomNumberInRange(1, 5)); 
 	document.getElementById("up").value = "ArrowUp";
@@ -430,7 +430,7 @@ function Start() {
 	);
 
 	interval = setInterval(UpdatePosition, 250);
-	intervalMonsters = setInterval(moveMonsters, 600);
+	intervalMonsters = setInterval(moveMonsters, 550);
 	intervalExtraFifty = setInterval(moveExtraFifty, 400);
 
 }
@@ -472,7 +472,7 @@ function GetKeyPressed() {
 function Draw(direction) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = Math.floor(time_elapsed);
 	lblLife.value = life;
 	lblUsername.value = $('#loginForm').find('input[name="username"]').val();
 
@@ -497,7 +497,7 @@ function Draw(direction) {
 				}
 			} else if (board[i][j] == 1.1) {//food
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 11, 0, 2 * Math.PI); // circle
 				context.fillStyle = fivepointsColor; //color
 				context.fill();
 			}
@@ -509,7 +509,7 @@ function Draw(direction) {
 			}
 			else if (board[i][j] == 1.3) {//food
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 19, 0, 2 * Math.PI); // circle
 				context.fillStyle = twenyfivepointsColor; //color
 				context.fill();
 			}
