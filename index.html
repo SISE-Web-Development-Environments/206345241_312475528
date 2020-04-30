@@ -20,9 +20,8 @@
 
 <body>
 	<header>
-		<img id="logo" src="logo.png">
+			<img id="logo" src="logo.png">
 		<strong id="headtitle"> The Pacman game by Yuval Mor Yosef- 312475528 and Adi Ashkenazi- 206345241</strong>
-
 	</header>
 	<script>
 
@@ -42,7 +41,7 @@
 	</div>
 	<div id="content">
 		<div id="welcome" class="content">
-			<span ALIGN="center"> <b>welcome to the pacman game!</b></span>
+			<span ALIGN="center"> <b>Welcome to the pacman game!</b></span>
 			<br>
 			<br>
 			<img id="openImg" src="open.png">
@@ -56,6 +55,7 @@
 		</div>
 
 		<div id="registration" class="content" style="display: none;">
+			<span> <b>Welcome to the registration page!</b></span>
 			<form class="cmxform" id="signupForm" name="signupForm" method="get" action="">
 				<fieldset>
 					<legend>Validating a complete form</legend>
@@ -94,7 +94,7 @@
 		</div>
 
 		<div id="login" class="content" style="display: none;">
-			<span> <b>welcome to the login page!</b></span>
+			<span> <b>Welcome to the login page!</b></span>
 			<form class="cmxform" id="loginForm" name="loginForm" method="get" action="">
 				<fieldset>
 					<legend>Log in:</legend>
@@ -115,7 +115,7 @@
 		</div>
 
 		<div id="settings" class="content" style="display: none;">
-			<span> <b>welcome to the settings page!</b></span>
+			<span> <b>Welcome to the settings page!</b></span>
 			<form class="cmxform" id="settingsForm" name="settingsForm" method="get" action="">
 				<fieldset>
 					<legend>settings:</legend>
@@ -166,7 +166,7 @@
 						<input id="monsters" name="monsters" type="text">
 					</p>
 
-					<button class="" onclick="randomDetails()">random</button>
+					<button class="random" onclick="randomDetails()">Random</button>
 
 					<p>
 						<input class="submit" type="submit" value="Submit">
@@ -179,11 +179,12 @@
 			<span> <b>welcome to the about page!</b></span>
 			<p>This Packman game submmited by Yuval Mor Yosef and Adi Ashkenazi.</p>
 			<p>We used jquery modal by "AJAX" that helped us by using an existing DOM element and loading a page with
-				AJAX.</p>
-			<p>Our difficulties in this project were:</p>
+				AJAX, we use jQuery Validation Plugin to validat the forms.	</p>
+			<p>Our difficulties in this project were understanding usage in jQuery in the beginning, and the design in the end.</p>
 			<a href="#" rel="modal:close">Close</a>
 		</div>
 		<div id="game" class="content" style="display: none;">
+		<div id="frame">
 			<div id="leftSide">
 				<table>
 					<td>
@@ -194,7 +195,7 @@
 							</div>
 						</tr>
 						<tr>
-							<div id="time">
+							<div id="times">
 								<label for="lblTime">TIME:</label>
 								<input id="lblTime" type="text" />
 							</div>
@@ -268,19 +269,20 @@
 					</tr>
 				</table>
 			</div>
-			<img id="myClockImage" src="sandClock.jpeg" type="image/png" style="display: none;">
-			<img id="myExtraFiftyImage" src="extra50.jpeg" type="image/jpg" style="display: none;">
-			<img id="myMedicineImage" src="circleMedicine.jpeg" type="image" style="display: none;">
-			<img id="myMonsterImage" src="monsterImage.jpeg" type="gif" style="display: none;">
+			<img id="myClockImage" src="sandClock.png" type="image/png" style="display: none;">
+			<img id="myExtraFiftyImage" src="extra50.png" type="image/jpg" style="display: none;">
+			<img id="myMedicineImage" src="circleMedicine.png" type="image" style="display: none;">
+			<img id="myMonsterImage" src="monsterImage.png" type="gif" style="display: none;">
 
 			<div id ="playGame">
 				<canvas id="canvas" height="600" width="600"></canvas>
 			</div>
 		</div>
-
+		</div>
 		<footer ALIGN="center">
+			This web was write in HTML5, css and javascript.
 			<strong><a href="mailto:yuvalmoryosef3@gmail.com">send mail to yuval</a></strong>
-			<br>
+			or
 			<strong><a href="mailto:adiashk@post.bgu.ac.il">send mail to adi</a></strong>
 		</footer>
 

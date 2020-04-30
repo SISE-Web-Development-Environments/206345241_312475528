@@ -102,8 +102,17 @@ function initDeails() {
 			}
 		},
 		submitHandler: function (form) {
-			if (!rand) {
 
+			saveDetails();
+
+/* 			flag = saveDetails();
+			if(!flag)
+			{
+				return false;
+			} */
+
+/* 			if (!rand) {
+ 
 				flag = saveDetails();
 				if(!flag)
 				{
@@ -111,14 +120,13 @@ function initDeails() {
 				}
 				//form.submit();
 
-			}
+			} */
 
 		}
 
 	});
 }
 function saveDetails() {
-	debugger;
 	foodAmount = $('#settingsForm').find('input[name="food"]').val();
 	fivepointsColor = $('#settingsForm').find('input[name="fivepointsColor"]').val();
 	fifteenpointsColor = $('#settingsForm').find('input[name="fifteenpointsColor"]').val();
@@ -157,13 +165,13 @@ function randomNumberInRange(min, max) {
 
 function randomDetails() {
 
-	foodAmount =  Math.floor(randomNumberInRange(50,91));
+	/* foodAmount =  Math.floor(randomNumberInRange(50,91)); 
 
 	fivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	fifteenpointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
 	twenyfivepointsColor = 	"#"+((1<<24)*Math.random()|0).toString(16);
-	/* time = randomNumberInRange(60,10000); */
-	time = 50;
+	time = randomNumberInRange(60,10000); 
+	//time = 50;
 	monstersAmount = Math.floor(randomNumberInRange(1, 5));
 	//monstersAmount = 2;
 	up = 38;
@@ -173,7 +181,22 @@ function randomDetails() {
 	rand = true;
 	start_time = new Date();
 	swapDiv('game');
-	Start();
+	Start(); */
+	document.getElementById("food").value=  Math.floor(randomNumberInRange(50,91));
+	document.getElementById("fivepointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("fifteenpointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("twentyfivepointsColor").value=  "#"+((1<<24)*Math.random()|0).toString(16);
+	document.getElementById("time").value =  randomNumberInRange(60,1000); 
+	document.getElementById("monsters").value = Math.floor(randomNumberInRange(1, 5)); 
+	document.getElementById("up").value = "ArrowUp";
+	document.getElementById("down").value =  "ArrowDown";
+	document.getElementById("left").value = "ArrowLeft";
+	document.getElementById("right").value = "ArrowRight";
+	up = 38;
+	down = 40;
+	left = 37;
+	right = 39;
+
 }
 function swapDiv(newDiv) {
 	var i, content;
@@ -304,13 +327,13 @@ function showSettings(){
 }
 
 
-/* function playAudio() { 
+function playAudio() { 
   song.play(); 
 } 
 
 function pauseAudio() { 
   song.pause(); 
-}  */
+} 
 
 function Start() {
 	song = document.getElementById("myAudio");
@@ -318,7 +341,7 @@ function Start() {
 	extraFiftyImage = document.getElementById("myExtraFiftyImage");
 	medicineImage = document.getElementById("myMedicineImage");
 	monsterImage = document.getElementById("myMonsterImage");
-	//playAudio();
+	playAudio();
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -629,26 +652,31 @@ function UpdatePosition() {
 	if (score >= 100 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-/* 	if (score == 200) {
+	if (score >= 500) {
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
 		window.alert("Game completed");
+		pauseAudio();
+
 	}
 	if (life == 0) {//lose
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
 		window.alert("Loser!");
-	} */
+		pauseAudio();
+	}
 	if (time_elapsed == timeGame) {//lose
 		if (score < 100) {
 			window.clearInterval(interval);
 			window.clearInterval(intervalMonsters);
 			window.alert("You are better than " + score + " points!");
+			pauseAudio();
 		}
 		else {
 			window.clearInterval(interval);
 			window.clearInterval(intervalMonsters);
 			window.alert("Winner!!!");
+			pauseAudio();
 		}
 
 	}
