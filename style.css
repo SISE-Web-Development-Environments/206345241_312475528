@@ -301,7 +301,8 @@ margin-left: auto;
 #canvas{
 
 		height:100%;
-/*  border: 13px solid yellow;*/ }
+/*  border: 13px solid yellow;*/ 
+}
  #playGame{
 	 order:2; /*flex order - put the bord between*/
    border: 3px solid grey;
