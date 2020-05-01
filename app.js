@@ -32,6 +32,7 @@ var clockImage = new Image();
 var medicineImage = new Image();
 var extraFiftyImage = new Image();
 var monsterImage= new Image();
+var sub;
 
 
 
@@ -103,13 +104,9 @@ function initDeails() {
 		},
 		submitHandler: function (form) {
 
-		//	saveDetails();
-
-			flag = saveDetails();
-			if(!flag)
-			{
-				return false;
-			}
+		if(sub){
+			saveDetails();
+		}
 
 /* 			if (!rand) {
  
@@ -141,6 +138,10 @@ function saveDetails() {
 		swapDiv('game');
 		Start();
 	
+}
+
+function submitFunc(){
+	sub=true;
 }
 
 function setUp() {
