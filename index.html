@@ -16,10 +16,16 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	<title>Pacman by Adi and Yuval</title>
 	<link rel="icon" type="image" href="logo.png">
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Cantarell:i|Big+Shoulders+Text:400,500,600,700">
 </head>
 
 <body>
 	<header>
+			<div class="pacman">
+			<div class="pacman__eye"></div>
+			<div class="pacman__mouth"></div>
+		</div>
 			<img id="logo" src="logo.png">
 		<strong id="headtitle"> The Pacman game by Yuval Mor Yosef- 312475528 and Adi Ashkenazi- 206345241</strong>
 	</header>
@@ -28,18 +34,17 @@
 		$(document).ready(function () {
 			swapDiv('welcome');
 		});
-
 	</script>
+	
 	<div id="menu">
 		<button class="tablink" onclick="swapDiv('welcome')" type="button">welcome</button>
 		<button class="tablink" onclick="swapDiv('registration')" type="button">registration</button>
-		<button class="tablink" onclick="swapDiv('login')" type="button">login</button>
-		<button id="tablinkAbout" class="tablink"> <a href="#about" rel="modal:open">about</a></button>
-		<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
-		<!--		<button class="tablink" onclick="swapDiv('game')">game</button> -->
+		<button class="tablink" onclick="swapDiv('login')" type="button" >login</button>
+		<a class="tablink" href="#about" rel="modal:open" >about</a>
 
 	</div>
 	<div id="content">
+	
 		<div id="welcome" class="content">
 			<span ALIGN="center"> <b>Welcome to the pacman game!</b></span>
 			<br>
@@ -120,54 +125,53 @@
 				<fieldset>
 					<legend>settings:</legend>
 
-					<p>
+					<p class="strow1">
 						<label for="up">up</label>
-						<input id="up" name="up" type="text" onkeydown="setUp()" autocomplete="off">
+						<input id="up" name="up" type="text" onkeydown="setUp()" autocomplete="off" placeholder="↑">
 					</p>
-					<p>
-						<label for="down">down</label>
-						<input id="down" name="down" type="text" onkeydown="setDown()" autocomplete="off">
-					</p>
-					<p>
+					<p class="strow2">
 						<label for="left">left</label>
-						<input id="left" name="left" type="text" onkeydown="setLeft()" autocomplete="off">
+						<input id="left" name="left" type="text" onkeydown="setLeft()" autocomplete="off" placeholder="←">
 					</p>
-					<p>
+					<p class="strow2">
 						<label for="right">right</label>
-						<input id="right" name="right" type="text" onkeydown="setRight()" autocomplete="off">
+						<input id="right" name="right" type="text" onkeydown="setRight()" autocomplete="off" placeholder="→">
 					</p>
-					<p>
-						<label for="food">food (between 50 and 90)</label>
-						<input id="food" name="food" type="text">
+					<p class="strow3">
+						<label for="down">down</label>
+						<input id="down" name="down" type="text" onkeydown="setDown()" autocomplete="off" placeholder="↓">
 					</p>
-
-					<p>
+					<p class="strow4" >
 						<label for="fivepointsColor"> five points Color</label>
-						<input id="fivepointsColor" name="fivepointsColor" type="color">
+						<input id="fivepointsColor" name="fivepointsColor" type="color" >
 					</p>
-					<p>
+					<p class="strow4">
 						<label for="fifteenpointsColor"> fifteen points Color</label>
 						<input id="fifteenpointsColor" name="fifteenpointsColor" type="color">
 					</p>
-					<p>
+					<p class="strow4">
 						<label for="twentyfivepointsColor"> twentyfive points Color</label>
 						<input id="twentyfivepointsColor" name="twentyfivepointsColor" type="color">
 					</p>
 
 					<label id="differentColors" style="display: none;"> all the colors need to be different from each
 						other</label>
-
-					<p>
+					<br>
+					<p class="strow5">
 						<label for="time">time fot the game (min 60 seconds)</label>
 						<input id="time" name="time" type="text">
 					</p>
-					<p>
+					<p class="strow5">
+						<label for="food">food (between 50 and 90)</label>
+						<input id="food" name="food" type="text">
+					</p>
+
+					<p class="strow5">
 						<label for="monsters">monsters amount (between 1 and 4)</label>
 						<input id="monsters" name="monsters" type="text">
 					</p>
-
+					<p id="randomp">
 					<button class="random" onclick="randomDetails()">Random</button>
-
 					<p>
 						<input class="submit" type="submit" value="Submit" onclick="submitFunc()">
 					</p>
@@ -213,15 +217,15 @@
 							</div>
 						</tr>
 						<tr>
-							<div id="newgame">
+							<div id="newgamediv">
 								<button id="newgame" onclick="newGame()" class="btnset">new Game</button>
 							</div>
 						</tr>
 						<tr>
-							<button id="playAudio" onclick="playAudio()" class="btnset" type="button">Play Audio</button>
+							<button id="playAudio" onclick="playAudio(pacmanSong)" class="btnset" type="button">Play Audio</button>
 						</tr>
 						<tr>	
-							<button id="pauseAudio" onclick="pauseAudio()" class="btnset" type="button">Pause Audio</button>
+							<button id="pauseAudio" onclick="pauseAudio(pacmanSong)" class="btnset" type="button">Pause Audio</button>
 						</tr>
 					</td>
 				</table>
@@ -229,6 +233,14 @@
 
 			<audio id="myAudio">
 				<source src="pacmanSong.mp3" type="audio/mpeg">
+			</audio>
+
+			<audio id="crashAudio">
+				<source src="crashAudio.mp3" type="audio/mpeg">
+			</audio>
+			
+			<audio id="successAudio">
+				<source src="successAudio.m4a" type="audio/mpeg">
 			</audio>
 
 			<div id="rightSide">
@@ -251,7 +263,7 @@
 						<td> <label for="foodAmount">food Amount:</label>
 							<input id="lblfoodAmount" type="text" /></td>
 
-						<td> <label for="lbltimesettings">time Setting:</label>
+						<td> <label for="lbltimesettings">total time:</label>
 							<input id="lbltimesettings" type="text" /></td>
 
 						<td> <label for="lblmonstersSettings">monsters amount:</label>
@@ -273,23 +285,46 @@
 			<img id="myExtraFiftyImage" src="extra50.png" type="image/jpg" style="display: none;">
 			<img id="myMedicineImage" src="circleMedicine.png" type="image" style="display: none;">
 			<img id="myMonsterImage" src="monsterImage.png" type="gif" style="display: none;">
-			<img id="winnerImage" src="winner.jpeg" type="gif" style="display: none;">
-			<img id="loserImage" src="loser.jpg" type="gif" style="display: none;">
-			<img id="gameCompletedImage" src="gameCompleted.jpg" type="gif" style="display: none;">
-			<img id="betterImage" src="better.jpg" type="gif" style="display: none;">
 
 			<div id ="playGame">
 				<canvas id="canvas" height="600" width="600"></canvas>
 			</div>
+
+			<div id="modals">
+				<div id="lose" class="game" style="display: none;">
+					<span> <b>Loser!</b></span>
+					<a href="#" rel="modal:close">Close</a>
+				</div>
+
+				<div id="Winner" class="game" style="display: none;">
+					<span> <b>Winner!!!</b></span>
+					<a href="#" rel="modal:close">Close</a>
+				</div>
+
+				<div id="Better" class="game" style="display: none;">
+					<span id="bscore"></span>
+					<a href="#" rel="modal:close">Close</a>
+				</div>
+
+				
+				<div id="completed" class="game" style="display: none;">
+					<span> <b>Game completed</b></span>
+					<a href="#" rel="modal:close">Close</a>
+				</div>
+		</div>
+
+
 		</div>
 		</div>
-		<footer ALIGN="center">
+	</div>
+
+	<footer ALIGN="center">
 			This web was written in HTML5, css and javascript.
 			<strong><a href="mailto:yuvalmoryosef3@gmail.com">send mail to yuval</a></strong>
 			or
 			<strong><a href="mailto:adiashk@post.bgu.ac.il">send mail to adi</a></strong>
-		</footer>
-
+			<button class="tablink" onclick="swapDiv('settings')" type="button">settings</button>
+	</footer>
 </body>
 
 </html>
