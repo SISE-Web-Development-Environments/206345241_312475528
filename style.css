@@ -86,12 +86,12 @@ header {
 	margin-top:0.5rem;
 	text-align:center;
 	display:block;
-	//border:1px solid red;
-	
+/* 	//border:1px solid red;
+ */	
 }
 form{
-	//border: 1px solid yellow;
-	//margin-top:1rem;
+/* 	//border: 1px solid yellow;
+	//margin-top:1rem; */
 	text-align: center;
 	margin-left: 10%;
 	width:80%;
@@ -111,8 +111,8 @@ form input{
 fieldset p{margin:0.3rem;}
 .strow1,.strow3 {
 	
-	//margin-top:0.2rem;
-	margin-right: auto;
+/* 	//margin-top:0.2rem;
+ */	margin-right: auto;
 	margin-left: auto;
 	width:65%;
 	}
@@ -248,10 +248,10 @@ input[type=color]{
 	font-size: 3vmin;
 	padding:1% 5%;
 	background-image:linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
-	//background-clip: text;
+/* 	//background-clip: text;
 //	-webkit-background-clip: text;
 	//color:black;
-	//text-transform:uppercase;
+	//text-transform:uppercase; */
 	font-weight:bold;
 	    text-shadow: 
 		0 1px 0px black,
@@ -412,11 +412,11 @@ input[type=color]{
 	width: 3.5vmin;
 	height: 3.5vmin;
 	border-radius: 50%;
-	//background: rgba(255, 255, 0,0.8);
-	background-image: radial-gradient(yellow,yellow 1%, orange 100%);
+/* 	//background: rgba(255, 255, 0,0.8);
+ */	background-image: radial-gradient(yellow,yellow 1%, orange 100%);
 	background-position:-25px -10px;
-//	background-size:150%;
-	box-shadow:inset -2px -5px 5px -3px rgba(0,0,0,0.7);
+/* //	background-size:150%;
+ */	box-shadow:inset -2px -5px 5px -3px rgba(0,0,0,0.7);
 	position: relative;
 	animation-name: move;
 	animation-duration: 5s;
@@ -472,8 +472,8 @@ footer{
 	color:#8a9fbd;
 	font-family:Roboto;
 	margin-top: auto;
-	//bottom:0;
-	text-transform: uppercase;
+/* 	//bottom:0;
+ */	text-transform: uppercase;
 }
 
 footer a:link {
