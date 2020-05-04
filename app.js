@@ -27,7 +27,9 @@ var medications;
 var clock = new Object();
 var flag;
 var timeGame;
-var song;
+var pacmanSong;
+var crashSong;
+var successSong;
 var clockImage = new Image();
 var medicineImage = new Image();
 var extraFiftyImage = new Image();
@@ -38,6 +40,7 @@ var loserImage = new Image();
 var gameCompletedImage = new Image();
 var betterImage = new Image();
 var sub;
+var tab = new Object();
 
 
 
@@ -188,10 +191,28 @@ function randomDetails() {
 	start_time = new Date();
 	swapDiv('game');
 	Start(); */
+	sub = false;
+
 	document.getElementById("food").value = Math.floor(randomNumberInRange(50, 91));
 	document.getElementById("fivepointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+	
 	document.getElementById("fifteenpointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+	
+	while(document.getElementById("fivepointsColor").value == document.getElementById("fifteenpointsColor").value)
+	{
+		document.getElementById("fifteenpointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+	}
+
 	document.getElementById("twentyfivepointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+
+	while(document.getElementById("fivepointsColor").value == document.getElementById("twentyfivepointsColor").value ||
+	 document.getElementById("fifteenpointsColor").value == document.getElementById("twentyfivepointsColor").value )
+	 {
+		document.getElementById("twentyfivepointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+	}
+
+
+	//document.getElementById("twentyfivepointsColor").value = "#" + ((1 << 24) * Math.random() | 0).toString(16);
 	//document.getElementById("time").value =  randomNumberInRange(60,1000); 
 	document.getElementById("time").value = Math.floor(randomNumberInRange(60, 1000));
 	document.getElementById("monsters").value = Math.floor(randomNumberInRange(1, 5));
@@ -334,16 +355,18 @@ function showSettings() {
 }
 
 
-function playAudio() {
+function playAudio(song) {
 	song.play();
 }
 
-function pauseAudio() {
+function pauseAudio(song) {
 	song.pause();
 }
 
 function Start() {
-	song = document.getElementById("myAudio");
+	pacmanSong = document.getElementById("myAudio");
+	crashSong = document.getElementById("crashAudio");
+	successSong = document.getElementById("successAudio");
 	clockImage = document.getElementById("myClockImage");
 	extraFiftyImage = document.getElementById("myExtraFiftyImage");
 	medicineImage = document.getElementById("myMedicineImage");
@@ -354,7 +377,7 @@ function Start() {
 	gameCompletedImage = document.getElementById("gameCompletedImage");
 	//	betterImage = document.getElementById("betterImage");
 	sub = false;
-	playAudio();
+	playAudio(pacmanSong);
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -460,7 +483,7 @@ function Start() {
 
 	interval = setInterval(UpdatePosition, 250);
 	intervalMonsters = setInterval(moveMonsters, 550);
-	intervalExtraFifty = setInterval(moveExtraFifty, 400);
+	intervalExtraFifty = setInterval(moveExtraFifty, 550);
 
 }
 
@@ -475,7 +498,7 @@ function findRandomEmptyCell(board) {
 }
 
 function findEmptyCell(board) {
-	debugger;
+	//debugger;
 	for (var i = 0; i < board.length; i++) {
 		for (var j = 0; j < board[i].length; j++) {
 			if (board[i][j] == 0) {
@@ -674,7 +697,7 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 2.6) {
-		timeGame += 30;
+		timeGame =parseInt(timeGame,10)+ 30;
 		board[clock.i][clock.j] = clock.z; //update the prev values
 	}
 
@@ -682,6 +705,7 @@ function UpdatePosition() {
 		score += 50;
 		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
 		window.clearInterval(intervalExtraFifty);
+		playAudio(successSong);
 	}
 	if (board[shape.i][shape.j] == 5) {//pacman meet monster
 		board[shape.i][shape.j] = 0;
@@ -693,48 +717,64 @@ function UpdatePosition() {
 		shape.j = emptyCell[1];
 		score -= 10;
 		life--;
+		playAudio(crashSong);
+
 	}
 	else {
 		board[shape.i][shape.j] = 2; //pacman
 	}
 	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
+	time_elapsed = Math.floor((currentTime - start_time) / 1000);
 	if (score >= 100 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 	if (score >= 500) {
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
-		window.alert("Game completed");
+		//window.alert("Game completed");
+		$('#completed').modal();
 		swapDiv('game');
 		//context.drawImage(gameCompletedImage,center.x-30,center.y-30, canvas.width/2, canvas.width/2);
-		pauseAudio();
+		pauseAudio(pacmanSong);
 
 	}
+	
 	if (life == 0) {//lose
 		window.clearInterval(interval);
 		window.clearInterval(intervalMonsters);
-		window.alert("Loser!");
+		//window.alert("Loser!");
+		tab = document.getElementById("lose");
+		//tab.rel="modal:open";
+		
+		$('#lose').modal();
 		swapDiv('game');
 		//context.drawImage(loserImage,center.x-30,center.y-30, canvas.width/2, canvas.width/2);
-		pauseAudio();
+		pauseAudio(pacmanSong);
 	}
+	
 	if (time_elapsed == timeGame) {//lose
 		if (score < 100) {
 			window.clearInterval(interval);
 			window.clearInterval(intervalMonsters);
-			window.alert("You are better than " + score + " points!");
-			swapDiv('settings');
+			//window.alert("You are better than " + score + " points!");
+			document.getElementById("bscore").textContent="You are better than " +score               + " points!";
+			//$('#bscore').value="You are better than " + score + " points!";
+
+			$('#Better').modal();
+			swapDiv('game');
+
+			//swapDiv('settings');
 			//context.drawImage(betterImage,center.x-30,center.y-30, canvas.width/2, canvas.width/2);
-			pauseAudio();
+			pauseAudio(pacmanSong);
 		}
 		else {
 			window.clearInterval(interval);
 			window.clearInterval(intervalMonsters);
-			window.alert("Winner!!!");
-			swapDiv('settings');
+			//window.alert("Winner!!!");
+			$('#Winner').modal();
+			swapDiv('game');
 			//context.drawImage(winnerImage,center.x-30,center.y-30, canvas.width/2, canvas.width/2);
-			pauseAudio();
+			pauseAudio(pacmanSong);
 		}
 
 	}
@@ -900,6 +940,7 @@ function moveMonsters() {
 			shape.j = emptyCell[1];
 			score -= 10;
 			life--;
+			playAudio(crashSong);
 		}
 
 		board[monsters[k].i][monsters[k].j] = 5;
@@ -959,6 +1000,14 @@ function moveExtraFifty() {
 			extraFifty.i++;
 		}
 	}
+
+	if (extraFifty.i == shape.i && extraFifty.j == shape.j) { //same plase after the move of the extra
+		score += 50;
+		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
+		window.clearInterval(intervalExtraFifty);
+		playAudio(successSong);
+	}
+
 	board[extraFifty.i][extraFifty.j] = 3;
 }
 
@@ -1020,3 +1069,5 @@ function pacmanUp(center) {
 	context.fill();
 
 }
+
+
