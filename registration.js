@@ -71,11 +71,9 @@ $(document).ready(function () {
 		submitHandler: function (form) {
 			saveNameAndPassword();
 			form.submit();
-			swapDiv('login');
 		}
 	
 	});
-
 });
 
 
