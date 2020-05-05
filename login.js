@@ -6,7 +6,8 @@ $(document).ready(function () {
 			return false;
 		}
 		if(b==false){
-			swapDiv('welcome');
+			//swapDiv('welcome');
+			window.alert("Error: check user or password");
 			return false;
 		}
 
