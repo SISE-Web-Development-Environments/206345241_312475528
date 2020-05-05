@@ -653,6 +653,7 @@ function Draw(direction) {
 }
 
 function UpdatePosition() {
+	pacmanSong.volume = 1;
 	showSettings();
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -705,7 +706,9 @@ function UpdatePosition() {
 		score += 50;
 		board[extraFifty.i][extraFifty.j] = extraFifty.z; //update the prev values
 		window.clearInterval(intervalExtraFifty);
+		pacmanSong.volume = 0.1;
 		playAudio(successSong);
+		
 	}
 	if (board[shape.i][shape.j] == 5) {//pacman meet monster
 		board[shape.i][shape.j] = 0;
@@ -717,6 +720,7 @@ function UpdatePosition() {
 		shape.j = emptyCell[1];
 		score -= 10;
 		life--;
+		pacmanSong.volume = 0.1;
 		playAudio(crashSong);
 
 	}
